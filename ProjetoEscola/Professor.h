@@ -1,7 +1,7 @@
-#include "Data.h"
+#ifndef PROFESSOR_H
+#define PROFESSOR_H
 
-int MenudeProfessores();
-int MenuRelatorios();
+#include "Data.h"
 
 #define Tam_Nome 101
 #define Tam_Data 12
@@ -19,5 +19,9 @@ typedef struct {
   char Cpf[Tam_Cpf];
 } Professor;
 
+int MenudeProfessores();
+int MenuRelatorios();
+void InserirProfessor(Professor ListaDeProfessor[],int qtd_prof_cadastrado);
+void ExcluirProfessor(Professor ListaDeProfessor[],int qtd_prof_cadastrado);
 
-
+#endif

@@ -1,3 +1,7 @@
+#include "Aluno.h"
+#include "Disciplina.h"
+#include "Professor.h"
+
 #define Tam_Nome 101
 #define Tam_Data 12
 #define Tam_Nome_Disc 20
@@ -7,3 +11,4 @@
 
 
 int MenuRelatorios();
+void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);

@@ -20,6 +20,7 @@ typedef struct {
 }Aluno;
 
 int MenudeAlunos();
-void InserirAluno();
+void InserirAluno(Aluno array[], int num);
+void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 
 #endif

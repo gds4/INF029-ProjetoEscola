@@ -4,6 +4,7 @@
 #include "Aluno.h"
 #include "Professor.h"
 #include "Disciplina.h"
+#include "FuncoesUsoGeral.h"
 
 int MenuRelatorios(){
   int MenuRelatorio;
@@ -24,4 +25,11 @@ int MenuRelatorios(){
   scanf("%d", &MenuRelatorio);
 
   return MenuRelatorio;
+}
+
+void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
+  int icont;
+  for(icont=0;icont<qtd_alunos_cadastrados;icont++){
+                printf("%d  %s %c %s\n" , ListaDeAlunos[icont].Matricula, ListaDeAlunos[icont].Nome, ListaDeAlunos[icont].Sexo, ListaDeAlunos[icont].Cpf);
+              }
 }
