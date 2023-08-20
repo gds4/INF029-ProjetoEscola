@@ -3,6 +3,7 @@
 #ifndef ALUNO_H
 #define ALUNO_H
 
+#define Tam_Matricula 6
 #define Tam_Nome 101
 #define Tam_Data 12
 #define Tam_Nome_Disc 20
@@ -22,5 +23,6 @@ typedef struct {
 int MenudeAlunos();
 void InserirAluno(Aluno array[], int num);
 void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
+void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 
 #endif

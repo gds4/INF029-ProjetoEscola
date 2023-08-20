@@ -54,3 +54,52 @@ void ExcluirProfessor(Professor ListaDeProfessor[],int qtd_prof_cadastrado){
     }
   }
 }
+
+void AtualizarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado){
+  int icont;
+  int jcont;
+  int matriculaprof;
+  int MenuAtualizarprof;
+  printf("Insira a Matrícula do Aluno: ");
+  scanf("%d",&matriculaprof);
+
+  for(icont=0;icont<qtd_prof_cadastrado+1;icont++){
+	  if(ListaDeProfessor[icont].Matricula==matriculaprof){
+		  printf("\nATUALIZAÇÃO DE DADOS PROFESSOR\n\n");
+		  printf("\nInforme o dado que deseja atualizar\n");
+		  printf("1 - Matrícula\n");
+		  printf("2 - Nome\n");
+		  printf("3 - CPF\n");
+		  printf("4 - Data de nascimento\n");
+		  scanf("%d", &MenuAtualizarprof);
+		  getchar();
+
+		  switch(MenuAtualizarprof){
+			  case 1:			  
+				  printf("\nInforme a matrícula: ");
+				  //fgets(ListaDeProfessor[icont].Matricula,Tam_Matricula,stdin);
+			  	break;
+
+			  case 2:
+			  	  printf("\nInforme o nome: ");
+			  	  fgets(ListaDeProfessor[icont].Nome,Tam_Nome,stdin);
+				  getchar();
+			  	break;
+			  
+			  case 3:
+			  	  printf("\nInforme o CPF: ");
+			  	  fgets(ListaDeProfessor[icont].Cpf,Tam_Cpf,stdin);
+			  	break;
+
+			  case 4:
+			  	  /*printf("\nInforme a data de nascimento (apenas números): ");
+			  	  scanf("%d %d %d", &ListaDeProfessor[icont].DataNasc.dia, 
+					&ListaDeAlunos[icont].DataNasc.mes, 			 	 
+					&ListaDeProfessor[icont].DataNasc.ano);*/
+			  	break;
+		  }
+	  }else{
+		  //printf("Matrícula não encontrada!");
+	  }
+  }
+}

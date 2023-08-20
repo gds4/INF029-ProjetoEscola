@@ -58,15 +58,19 @@ int main(void) {
           switch (MenuAluno) {
             
             case 1:{
-              InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-              qtd_alunos_cadastrados++;
-              break;
+            	InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+            	qtd_alunos_cadastrados++;
+            	break;
             }
             case 2:{
-              ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-              qtd_alunos_cadastrados--;
-              break;
+            	ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+            	qtd_alunos_cadastrados--;
+            	break;
             }
+			case 3:{
+				AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+				break;
+			}
           }
             
               
@@ -87,6 +91,10 @@ int main(void) {
               qtd_prof_cadastrado--;
               break;
             }
+			case 3:{
+				AtualizarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+				break;
+			}
           
           }
           break;
