@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "FuncoesUsoGeral.h"
 #include "Aluno.h"
 #include "Professor.h"
 #include "Disciplina.h"
-#include "FuncoesUsoGeral.h"
 
 int MenuRelatorios(){
   int MenuRelatorio;
@@ -30,6 +30,22 @@ int MenuRelatorios(){
 void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
   int icont;
   for(icont=0;icont<qtd_alunos_cadastrados;icont++){
-                printf("%d  %s %c %s\n" , ListaDeAlunos[icont].Matricula, ListaDeAlunos[icont].Nome, ListaDeAlunos[icont].Sexo, ListaDeAlunos[icont].Cpf);
+                printf("%s  %s %c %s\n" , ListaDeAlunos[icont].Matricula, ListaDeAlunos[icont].Nome, ListaDeAlunos[icont].Sexo, ListaDeAlunos[icont].Cpf);
               }
 }
+
+
+void ListarDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
+  int icont;
+  int jcont;
+  
+    for(icont = 0; icont < QTD_Disc; icont++)
+    {
+      printf("\nLista de Disciplinas\n");
+      puts(ListaDeDisciplina[icont].Nome);
+      printf("%s \n", ListaDeDisciplina[icont].Codigo);
+      puts(ListaDeDisciplina[icont].Semestre);
+      printf("%s \n", ListaDeDisciplina[icont].Professor);
+      //lista de alunos em cada disciplina
+    }
+}   

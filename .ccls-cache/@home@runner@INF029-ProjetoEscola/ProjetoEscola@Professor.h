@@ -3,6 +3,7 @@
 
 #include "Data.h"
 
+#define Tam_Matricula 7
 #define Tam_Nome 101
 #define Tam_Data 12
 #define Tam_Nome_Disc 20
@@ -12,7 +13,7 @@
 #define QTD_Disc 3
 
 typedef struct {
-  int Matricula;
+  char Matricula[Tam_Matricula];
   char Nome[Tam_Nome];
   char Sexo;
   Data DataNasc;

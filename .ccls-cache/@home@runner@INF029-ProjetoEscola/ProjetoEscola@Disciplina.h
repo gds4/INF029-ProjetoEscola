@@ -9,6 +9,7 @@
 #define QTD_Professor 5
 #define QTD_Disc 3
 
+
 typedef struct{
   char Nome[Tam_Nome_Disc];
   int Codigo;
@@ -18,5 +19,7 @@ typedef struct{
 
 int MenudeDisciplina();
 void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado);
+int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado) ;
+void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int codigo);
 
 #endif

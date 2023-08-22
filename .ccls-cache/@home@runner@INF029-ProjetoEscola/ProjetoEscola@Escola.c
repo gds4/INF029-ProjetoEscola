@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "FuncoesUsoGeral.h"
 #include "Aluno.h"
 #include "Professor.h"
 #include "Disciplina.h"
 #include "Relatorio.h"
-#include "FuncoesUsoGeral.h"
 
 int TelaInicial();
 int MenuPrincipal();
 void delbar0(char string[]);
+
+//enum MENU_OPCOES_DISCIPLINA {
+//  INSERIR_DISCIPLINA = 1, ATUALIZAR_DISCIPLINA = 2
+//};
+
 
 int main(void) {
   
@@ -26,6 +31,8 @@ int main(void) {
   int qtd_alunos_cadastrados=0;
   int qtd_prof_cadastrado=0;
   int qtd_disc_cadastrado=0;
+  int codigo_disciplina_atualizar = 0;
+  int resultado_atualizacao = 0;
   char stringteste[50];
   int matricula;
   int matriculaprof;
@@ -67,9 +74,9 @@ int main(void) {
             	qtd_alunos_cadastrados--;
             	break;
             }
-			case 3:{
-				AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-				break;
+      			case 3:{
+      				AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+      				break;
 			}
           }
             
@@ -104,15 +111,28 @@ int main(void) {
           
           MenuDisciplina = MenudeDisciplina();
           switch (MenuDisciplina)
-            case 1:
-            {
+          {
+            case 1:            
               InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
               qtd_disc_cadastrado++;
               break;
-            }
+            
+            case 2:
+            
+              printf("\nAtualize o cadastro da disciplina: digite o código: \n");
+              scanf("%d", &codigo_disciplina_atualizar);
+              resultado_atualizacao = AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, qtd_disc_cadastrado);
+              if (resultado_atualizacao == 1)
+                printf("\nDisciplina atualizada com sucesso\n");
+              else
+                printf("\nErro na atualização da disciplina\n");
+              break;
+          } 
           break;
         }
+        case 3:{
           
+        }  
         case 4:{
           
           MenuRelatorio = MenuRelatorios();
@@ -156,9 +176,9 @@ int MenuPrincipal(){
   printf("\nSelecione a opção desejada:\n");
   printf("\n* Para selecionar a opção, pressione o valor referente a mesma:\n\n");
   printf("0 - Retornar\n");
-  printf("1 - Cadastrar Aluno\n");
-  printf("2 - Cadastrar Professor\n");
-  printf("3 - Cadastrar Disciplina\n");
+  printf("1 - Módulo Aluno\n");
+  printf("2 - Módulo Professor\n");
+  printf("3 - Módulo Disciplina\n");
   printf("4 - Relatorios\n");
   scanf("%d", &MenuInicial);
 
