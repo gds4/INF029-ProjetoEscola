@@ -114,7 +114,10 @@ int main(void) {
             
             MenuDisciplina = MenudeDisciplina();
             switch (MenuDisciplina)
-            {
+            { 
+              case 0:{
+                break;
+              }
               case 1:{           
                 InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
                 qtd_disc_cadastrado++;
@@ -161,12 +164,6 @@ int main(void) {
             }
             break;
           }
-         
-          default:
-            
-            printf("Valor Inválido");
-            break;
-          
         }
       }
     }
