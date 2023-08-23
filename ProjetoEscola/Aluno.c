@@ -6,11 +6,12 @@
 
 int MenudeAlunos(){
   int MenuAluno;
-  printf("\n  1 > Inserir Aluno \n");
+  printf("\n  0 > Retornar\n");
+  printf("  1 > Inserir Aluno \n");
   printf("  2 > Excluir Aluno \n");
   printf("  3 > Atualizar Cadastro do Aluno \n");
-  scanf("%d", &MenuAluno);
-  getchar();
+  MenuAluno = VerificacaoValorMenu(0,3);
+  
   return MenuAluno;
 }
 
@@ -24,13 +25,16 @@ void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
   getchar();
   int resultado = ValidarSexo(ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
   while (resultado == 0){
-    printf("Digite F ou M para informar o sexo");
+    printf("Cadastro inválido: digite F ou M para informar o sexo");
     scanf(" %c", &ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
     getchar();
     resultado = ValidarSexo(ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
   }
     printf("Insira a data de nascimento do aluno:\n");
-  
+    scanf("%d %d %d", &ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia, 
+				&ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes, 		 
+	    		&ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano);
+	getchar();
   
   printf("Insira o cpf do aluno:\n");
   fgets(ListaDeAlunos[qtd_alunos_cadastrados].Cpf,Tam_Cpf,stdin);
@@ -67,51 +71,59 @@ void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
 void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
   int icont;
   int jcont;
+  int sair = 0;
   char matricula[Tam_Matricula];
   int MenuAtualizar;
   printf("Insira a Matrícula do Aluno: ");
   fgets(matricula,Tam_Matricula,stdin);
 
-  for(icont=0;icont<qtd_alunos_cadastrados+1;icont++){
-	  for(jcont=0;jcont<Tam_Matricula;jcont++){
-		  if(ListaDeAlunos[icont].Matricula[jcont]==matricula[jcont]){
-			  printf("\nATUALIZAÇÃO DE DADOS\n\n");
-			  printf("\nInforme o dado que deseja atualizar\n");
-			  printf("1 - Matrícula\n");
-			  printf("2 - Nome\n");
-			  printf("3 - CPF\n");
-			  printf("4 - Data de nascimento\n");
-			  scanf("%d", &MenuAtualizar);
-			  getchar();
-	
-			  switch(MenuAtualizar){
-				  case 1:			  
-					  printf("\nInforme a matrícula: ");
-					  fgets(ListaDeAlunos[icont].Matricula,Tam_Matricula,stdin);
-				  	break;
-	
-				  case 2:
-				  	  printf("\nInforme o nome: ");
-				  	  fgets(ListaDeAlunos[icont].Nome,Tam_Nome,stdin);
-				  	break;
-				  
-				  case 3:
-				  	  printf("\nInforme o CPF: ");
-				  	  fgets(ListaDeAlunos[icont].Cpf,Tam_Cpf,stdin);
-				  	break;
-	
-				  case 4:
-				  	  printf("\nInforme a data de nascimento (apenas números): ");
-				  	  scanf("%d %d %d", &ListaDeAlunos[icont].DataNasc.dia, 
-						&ListaDeAlunos[icont].DataNasc.mes, 		 
-    					&ListaDeAlunos[icont].DataNasc.ano);
-				  	break;
+    while(!sair){
+	  for(icont=0;icont<qtd_alunos_cadastrados+1 && sair == 0;icont++){
+		  for(jcont=0;jcont<Tam_Matricula && sair == 0;jcont++){
+			  if(ListaDeAlunos[icont].Matricula[jcont]==matricula[jcont]){
+				  printf("\nATUALIZAÇÃO DE DADOS\n\n");
+				  printf("\nInforme o dado que deseja atualizar\n");
+				  printf("0 - Retornar\n");
+				  printf("1 - Matrícula\n");
+				  printf("2 - Nome\n");
+				  printf("3 - CPF\n");
+				  printf("4 - Data de nascimento\n");
+				  scanf("%d", &MenuAtualizar);
+				  getchar();
+		
+				  switch(MenuAtualizar){
+					  case 0:
+					  	  sair = 1;
+					  	  break;
+					  case 1:			  
+						  printf("\nInforme a matrícula: ");
+						  fgets(ListaDeAlunos[icont].Matricula,Tam_Matricula,stdin);
+					  	break;
+		
+					  case 2:
+					  	  printf("\nInforme o nome: ");
+					  	  fgets(ListaDeAlunos[icont].Nome,Tam_Nome,stdin);
+					  	break;
+					  
+					  case 3:
+					  	  printf("\nInforme o CPF: ");
+					  	  fgets(ListaDeAlunos[icont].Cpf,Tam_Cpf,stdin);
+					  	break;
+		
+					  case 4:
+					  	  printf("\nInforme a data de nascimento (apenas números): ");
+					  	  scanf("%d %d %d", &ListaDeAlunos[icont].DataNasc.dia, 
+							&ListaDeAlunos[icont].DataNasc.mes, 		 
+	    					&ListaDeAlunos[icont].DataNasc.ano);
+						  getchar();
+					  	break;
+				  }
+			  }else{
+				  //printf("Matrícula não encontrada!");
 			  }
-		  }else{
-			  //printf("Matrícula não encontrada!");
 		  }
-	  }
-	}
+		}
+    }
 }
 
 

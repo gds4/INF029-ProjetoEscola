@@ -8,6 +8,7 @@
 #define QTD_Disc 3
 
 void delbar0(char string[]);
+int VerificacaoValorMenu(int num1,int num2);
 int ValidarSexo(char sexo);
 void ValidarNome(char Lista[]);
 void ValidarMatricula(char Matricula[]);

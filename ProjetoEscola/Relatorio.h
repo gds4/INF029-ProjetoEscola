@@ -12,3 +12,6 @@
 
 int MenuRelatorios();
 void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
+void ListarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado);
+void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado, int disciplina);
+void ListarProfessorSexo (Professor ListaDeProfessor[], int qtd_prof_cadastrado);

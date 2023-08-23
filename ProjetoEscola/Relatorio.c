@@ -8,7 +8,8 @@
 
 int MenuRelatorios(){
   int MenuRelatorio;
-  printf("\n  1 > Listar Alunos \n");
+  printf("\n  0 > Retornar\n");
+  printf("  1 > Listar Alunos \n");
   printf("  2 > Listar Professores \n");
   printf("  3 > Listar Disciplinas \n");
   printf("  4 > Listar uma disciplina \n");
@@ -22,30 +23,147 @@ int MenuRelatorios(){
   printf("  12 > Lista de pessoas \n");
   printf("  13 > Lista de alunos matriculados em menos de 3 disciplinas \n");
   printf("  14 > Lista de Disciplinas, com nome do professor, que extrapolam 40 vagas. \n");
-  scanf("%d", &MenuRelatorio);
+  MenuRelatorio=VerificacaoValorMenu(0,14);
 
   return MenuRelatorio;
 }
 
 void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
   int icont;
-  for(icont=0;icont<qtd_alunos_cadastrados;icont++){
-                printf("%s  %s %c %s\n" , ListaDeAlunos[icont].Matricula, ListaDeAlunos[icont].Nome, ListaDeAlunos[icont].Sexo, ListaDeAlunos[icont].Cpf);
-              }
+  printf("\n%-9s %-30s %-4s %-15s %-10s\n", "Matrícula", "Nome", "Sexo", "CPF",
+        "Nascimento");
+    
+    
+    printf("--------- ------------------------------ ---- --------------- ----------\n");
+    
+    for(icont=0;icont<qtd_alunos_cadastrados;icont++){
+      printf("%-9s %-30s %-4c %-15s %.2d/%.2d/%d\n", ListaDeAlunos[icont].Matricula, 
+                                                     ListaDeAlunos[icont].Nome, 
+                                                     ListaDeAlunos[icont].Sexo, 
+                                                     ListaDeAlunos[icont].Cpf,
+                    										             ListaDeAlunos[icont].DataNasc.dia,
+									                    	             ListaDeAlunos[icont].DataNasc.mes,
+		  								                               ListaDeAlunos[icont].DataNasc.ano);
+
+	/*printf("\n--------------------------------------------------------\n");
+ 	printf("\nMatrícula\n");
+    printf("------------\n");
+	printf(" %-9s\n", ListaDeAlunos[icont].Matricula);
+ 	printf("------------\n");
+  	printf("\nNome\n");
+   	printf("--------------------------------\n");
+   	printf(" %-30s\n", ListaDeAlunos[icont].Nome);
+	printf("--------------------------------\n");
+ 	printf("\nSexo\n");
+  	printf("-----\n");
+   	printf("  %-4c\n", ListaDeAlunos[icont].Sexo);
+	printf("-----\n");
+ 	printf("\nCPF\n");
+  	printf("-----------------\n");
+   	printf(" %-15s", ListaDeAlunos[icont].Cpf);
+	printf("-----------------\n");
+ 	printf("\nData de nascimento\n");
+  	printf("------------------\n");
+   	printf(" %.2d/%.2d/%d\n", ListaDeAlunos[icont].DataNasc.dia,
+							ListaDeAlunos[icont].DataNasc.mes,
+		  					ListaDeAlunos[icont].DataNasc.ano);
+	printf("------------------\n");
+	
+ 	printf("\n--------------------------------------------------------\n");*/
+	}
 }
+
+void ListarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado){
+  int icont;
+  printf("%-9s %-30s %-4s %-15s %-10s\n", "Matrícula", "Nome", "Sexo", "CPF",     
+        "Nascimento");
+    
+    
+    printf("--------- ------------------------------ ---- --------------- ----------\n");
+    
+    for(icont=0;icont<qtd_prof_cadastrado;icont++)
+      printf("%-9s %-30s %-4c %-15s \n", ListaDeProfessor[icont].Matricula, 
+                                         ListaDeProfessor[icont].Nome, 
+                                         ListaDeProfessor[icont].Sexo, 
+                                         ListaDeProfessor[icont].Cpf);
+}
+
+
+void ListarProfessorSexo (Professor ListaDeProfessor[], int qtd_prof_cadastrado){
+  int icont;
+  printf("\nLista de Professores do sexo masculino\n");
+    for (icont = 0; icont < qtd_prof_cadastrado; icont++)
+    {
+      if ((ListaDeProfessor[icont].Sexo == 'M') || (ListaDeProfessor[icont].Sexo == 'm'))
+        printf(" %s \n", ListaDeProfessor[icont].Nome);
+    }
+
+  printf("\nLista de Professores do sexo feminino\n");
+    for (icont = 0; icont < qtd_prof_cadastrado; icont++){
+      if ((ListaDeProfessor[icont].Sexo == 'F') || (ListaDeProfessor[icont].Sexo == 'f'))
+        printf(" %s \n", ListaDeProfessor[icont].Nome);
+    }
+}
+    
 
 
 void ListarDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
   int icont;
-  int jcont;
+ // int jcont;
   
-    for(icont = 0; icont < QTD_Disc; icont++)
-    {
-      printf("\nLista de Disciplinas\n");
-      puts(ListaDeDisciplina[icont].Nome);
-      printf("%s \n", ListaDeDisciplina[icont].Codigo);
-      puts(ListaDeDisciplina[icont].Semestre);
-      printf("%s \n", ListaDeDisciplina[icont].Professor);
+  for(icont = 0; icont < qtd_disc_cadastrado; icont++)
+  {
+    printf("\nLista de Disciplinas\n");
+    puts(ListaDeDisciplina[icont].Nome);
+    printf("%d \n", ListaDeDisciplina[icont].Codigo);
+    printf("%d  \n", ListaDeDisciplina[icont].Semestre);
+    printf("%s \n", ListaDeDisciplina[icont].Professor);
       //lista de alunos em cada disciplina
-    }
+  }
 }   
+
+void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado, int disciplina){
+  int icont;  
+  for(icont = 0; icont < qtd_disc_cadastrado; icont++)
+  {
+    if (ListaDeDisciplina[icont].Nome == disciplina)
+    {
+       printf("%-9s %-30s %-4c %-15s \n",  ListaDeDisciplina[icont].Nome,  
+                                           ListaDeDisciplina[icont].Codigo,     
+                                           ListaDeDisciplina[icont].Semestre,  
+                                           ListaDeDisciplina[icont].Professor);     
+    } else {
+      printf("\nA disciplina não existe");
+    }
+  }
+  
+}
+
+void ListarAlunoSexo (Aluno ListaDeAluno[], int qtd_alunos_cadastrados){
+  int icont;
+  printf("\nLista de alunos por sexo masculino\n");
+    for (icont = 0; icont < qtd_alunos_cadastrados; icont++)
+    {
+      if ((ListaDeAluno[icont].Sexo == 'M') || (ListaDeAluno[icont].Sexo == 'm'))
+      {        
+        printf("%-9s %-30s %-4c %-15s \n",  ListaDeAluno[icont].Nome,  
+                                            ListaDeAluno[icont].Matricula, 
+                                            ListaDeAluno[icont].Sexo,    
+                                            ListaDeAluno[icont].DataNasc,
+                                            ListaDeAluno[icont].Cpf);
+      }
+    }
+  
+  printf("\nLista de alunos por sexo feminino\n");
+    for (icont = 0; icont < qtd_alunos_cadastrados; icont++)
+    {
+      if ((ListaDeAluno[icont].Sexo == 'F') || (ListaDeAluno[icont].Sexo == 'f'))
+      {        
+        printf("%-9s %-30s %-4c %-15s \n",  ListaDeAluno[icont].Nome,  
+                                            ListaDeAluno[icont].Matricula, 
+                                            ListaDeAluno[icont].Sexo,
+                                            ListaDeAluno[icont].DataNasc,
+                                            ListaDeAluno[icont].Cpf);
+      }
+    }
+}

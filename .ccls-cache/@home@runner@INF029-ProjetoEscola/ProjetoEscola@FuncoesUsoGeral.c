@@ -10,6 +10,38 @@ void delbar0(char string[]){
     if(string[dbcont]=='\n')
       string[dbcont]='\0';
 }
+int VerificacaoValorMenu(int num1,int num2){
+  int icont;
+  int valido=-1;
+  int verificado=-1;
+  int validacao=0;
+  char str_verif[100];
+  while(valido!=0){
+    fgets(str_verif,100,stdin);
+    delbar0(str_verif);
+    int comprimento = strlen(str_verif);
+    if(comprimento==1 || comprimento==2){
+      for(icont=0;icont<comprimento;icont++)
+        if(str_verif[icont]>='0' && str_verif[icont]<='9')
+        {
+          validacao++;
+          
+        }else validacao--;
+        
+
+      if(validacao==comprimento){
+        verificado= atoi(str_verif);
+        
+        if(verificado>=num1 && verificado<=num2){
+          valido=0;
+        }else printf("\nComando Inválido! Tente Novamente\n");
+      }else printf("\nComando Inválido! Tente Novamente\n");
+    }else printf("\nComando Inválido! Tente Novamente\n");
+  }
+  
+  return verificado;
+  
+}
 
 void ValidarNome(char Lista[]){
   char verificacao[200];
