@@ -73,10 +73,10 @@ int main(void) {
               	qtd_alunos_cadastrados--;
               	break;
               }
-        			case 3:{
-        				AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-        				break;
-    			    }  
+				case 3:{
+					AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+					break;
+				}  
             }
               
                 
@@ -161,6 +161,13 @@ int main(void) {
                 ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
                 break;
               }
+				case 6: {
+					ListarAlunosNome(ListaDeAlunos, qtd_alunos_cadastrados);
+					break;
+				}
+				case 9:
+					ListarProfessoresNome(ListaDeProfessor, qtd_prof_cadastrado);
+					break;
             }
             break;
           }

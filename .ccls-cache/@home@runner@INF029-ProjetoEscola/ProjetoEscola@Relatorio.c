@@ -167,3 +167,71 @@ void ListarAlunoSexo (Aluno ListaDeAluno[], int qtd_alunos_cadastrados){
       }
     }
 }
+
+void ListarAlunosNome(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
+	int icont;
+	int jcont;
+	int comparar;
+	char aux[Tam_Nome];
+	for(icont = 0; icont < qtd_alunos_cadastrados - 1;icont++){
+		for(jcont = icont + 1; jcont < qtd_alunos_cadastrados; jcont++){
+			comparar = strcmp(ListaDeAlunos[icont].Nome, ListaDeAlunos[jcont].Nome);
+			if(comparar > 0){
+				strcpy(aux, ListaDeAlunos[icont].Nome);
+				strcpy(ListaDeAlunos[icont].Nome, ListaDeAlunos[jcont].Nome);
+				strcpy(ListaDeAlunos[jcont].Nome, aux);
+			}
+		}
+	}
+	
+	printf("\n%-9s %-30s %-4s %-15s %-10s\n", "Matrícula", "Nome", "Sexo", "CPF",
+        "Nascimento");
+    
+    
+    printf("--------- ------------------------------ ---- --------------- ----------\n");
+	
+	
+    for(icont=0;icont<qtd_alunos_cadastrados;icont++){
+      printf("%-9s %-30s %-4c %-15s %.2d/%.2d/%d\n", ListaDeAlunos[icont].Matricula, 
+                                                     ListaDeAlunos[icont].Nome, 
+                                                     ListaDeAlunos[icont].Sexo, 
+		  											ListaDeAlunos[icont].Cpf,
+		  											ListaDeAlunos[icont].DataNasc.dia,
+		  											ListaDeAlunos[icont].DataNasc.mes,
+		  											ListaDeAlunos[icont].DataNasc.ano);
+	}
+}
+
+void ListarProfessoresNome(Professor ListaDeProfessor[], int qtd_prof_cadastrado){
+	int icont;
+	int jcont;
+	int comparar;
+	char aux[Tam_Nome];
+	for(icont = 0; icont < qtd_prof_cadastrado - 1;icont++){
+		for(jcont = icont + 1; jcont < qtd_prof_cadastrado; jcont++){
+			comparar = strcmp(ListaDeProfessor[icont].Nome, ListaDeProfessor[jcont].Nome);
+			if(comparar > 0){
+				strcpy(aux, ListaDeProfessor[icont].Nome);
+				strcpy(ListaDeProfessor[icont].Nome, ListaDeProfessor[jcont].Nome);
+				strcpy(ListaDeProfessor[jcont].Nome, aux);
+			}
+		}
+	}
+	
+	printf("\n%-9s %-30s %-4s %-15s %-10s\n", "Matrícula", "Nome", "Sexo", "CPF",
+        "Nascimento");
+    
+    
+    printf("--------- ------------------------------ ---- --------------- ----------\n");
+	
+	
+    for(icont=0;icont<qtd_prof_cadastrado;icont++){
+      printf("%-9s %-30s %-4c %-15s \n", ListaDeProfessor[icont].Matricula, 
+                                  /*%.2d/%.2d/%d*/   ListaDeProfessor[icont].Nome, 
+                                                     ListaDeProfessor[icont].Sexo, 
+		  											ListaDeProfessor[icont].Cpf);
+		  											/*ListaDeProfessor[icont].DataNasc.dia,
+		  											ListaDeProfessor[icont].DataNasc.mes,
+		  											ListaDeProfessor[icont].DataNasc.ano);*/
+	}
+}

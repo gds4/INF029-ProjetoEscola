@@ -18,7 +18,7 @@ int MenudeDisciplina() {
 
 void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado) {
 
-  printf("\nInsira o nome da disciplina\n");
+  printf("\nInsira o nome da disciplina:\n");
   fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
 
   printf("\nInsira o código da disciplina:\n");
@@ -61,10 +61,11 @@ int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_at
     int codigo;
     printf("Insira o código da disciplina que deseja atualizar:\n");
     scanf("%d", &codigo);
+	getchar();
     for (i=0; i< qtd_disc_cadastrado; i++){
       if(ListaDeDisciplina[i].Codigo == codigo){
               printf("\n\nDisciplina encontrada\n\n");
-              printf("\nInsira o novo nome da disciplina\n");
+              printf("\nInsira o novo nome da disciplina:\n");
               fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
               setbuf(stdin, NULL);
             
@@ -88,7 +89,7 @@ int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_at
     } else {
       printf("Código de disciplina inválido\n");
     }
-  }
+}
   
 
 void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado) {
