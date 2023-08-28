@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int MenudeProfessores() {
   int MenuProfessor;
@@ -18,26 +19,9 @@ int MenudeProfessores() {
 void InserirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
   ValidarMatricula(ListaDeProfessor[qtd_prof_cadastrado].Matricula);
   ValidarNome(ListaDeProfessor[qtd_prof_cadastrado].Nome);
-
-  printf("Insira o sexo do Professor: M/F\n");
-  scanf(" %c", &ListaDeProfessor[qtd_prof_cadastrado].Sexo);
-  getchar();
-  int resultado = ValidarSexo(ListaDeProfessor[qtd_prof_cadastrado].Sexo);
-  
-  while (resultado == 0) {
-    printf("\nCadastro inválido: digite F ou M para informar o sexo\n");
-    scanf(" %c", &ListaDeProfessor[qtd_prof_cadastrado].Sexo);
-    getchar();
-    resultado = ValidarSexo(ListaDeProfessor[qtd_prof_cadastrado].Sexo);
-  }
-
-  /*printf("Insira a data de nascimento do Professor:\n");
-  fgets(ListaDeProfessor[qtd_prof_cadastrado].DataNasc, Tam_Data, stdin);
-  delbar0(ListaDeProfessor[qtd_prof_cadastrado].DataNasc);*/
-  
-  printf("Insira o cpf do Professor:\n");
-  fgets(ListaDeProfessor[qtd_prof_cadastrado].Cpf, Tam_Cpf, stdin);
-  delbar0(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
+  ValidarSexo(ListaDeProfessor[qtd_prof_cadastrado].Sexo);
+  ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,&ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
+  ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
 }
 
 void ExcluirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
@@ -46,14 +30,24 @@ void ExcluirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
   char matriculaprof[Tam_Matricula];
   printf("Insira a Matrícula do Professor");
   fgets(matriculaprof, Tam_Matricula, stdin);
-  for (icont = 0; icont < qtd_prof_cadastrado + 1; icont++) {
-    if (ListaDeProfessor[icont].Matricula == matriculaprof) {
-      for (jcont = icont + 1; jcont < qtd_prof_cadastrado; jcont++) {
-        /*ListaDeProfessor[jcont-1].Matricula=ListaDeProfessor[jcont].Matricula;*/
-        strcpy(ListaDeProfessor[jcont - 1].Cpf, ListaDeProfessor[jcont].Cpf);
-        strcpy(ListaDeProfessor[jcont - 1].Nome, ListaDeProfessor[jcont].Nome);
-        ListaDeProfessor[jcont - 1].Sexo = ListaDeProfessor[jcont].Sexo;
-        /*strcpy(ListaDeProfessor[jcont-1].DataNasc,ListaDeProfessor[jcont].DataNasc);*/
+  delbar0(matriculaprof);
+  for (icont = 0; icont < qtd_prof_cadastrado + 1; icont++) 
+  {
+    if (ListaDeProfessor[icont].Matricula == matriculaprof) 
+    {
+      if(icont!=qtd_prof_cadastrado-1)
+      {
+        for (jcont = icont + 1; jcont < qtd_prof_cadastrado; jcont++) 
+        {
+          strcpy(ListaDeProfessor[jcont-1].Matricula,ListaDeProfessor[jcont].Matricula);
+          strcpy(ListaDeProfessor[jcont - 1].Cpf, ListaDeProfessor[jcont].Cpf);
+          strcpy(ListaDeProfessor[jcont - 1].Nome, ListaDeProfessor[jcont].Nome);
+          ListaDeProfessor[jcont - 1].Sexo = ListaDeProfessor[jcont].Sexo;
+          strcpy(ListaDeProfessor[jcont-1].DataNasc.str_data,ListaDeProfessor[jcont].DataNasc.str_data);
+          ListaDeProfessor[jcont-1].DataNasc.dia=ListaDeProfessor[jcont].DataNasc.dia;
+          ListaDeProfessor[jcont-1].DataNasc.mes=ListaDeProfessor[jcont].DataNasc.mes;
+          ListaDeProfessor[jcont-1].DataNasc.ano=ListaDeProfessor[jcont].DataNasc.ano;
+        }
       }
     }
   }

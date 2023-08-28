@@ -1,5 +1,7 @@
+#include "Data.h"
+
 #define Tam_Nome 101
-#define Tam_Data 12
+
 #define Tam_Nome_Disc 20
 #define Tam_Cpf 16
 #define Tam_Matricula 7
@@ -9,6 +11,9 @@
 
 void delbar0(char string[]);
 int VerificacaoValorMenu(int num1,int num2);
-int ValidarSexo(char sexo);
+void ValidarSexo();
 void ValidarNome(char Lista[]);
 void ValidarMatricula(char Matricula[]);
+int PadraoData(char str[]);
+void ValidarData(char Lista[],Data *Referido);
+void ValidarCPF(char Lista[]);

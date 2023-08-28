@@ -33,7 +33,6 @@ int main(void) {
   int qtd_disc_cadastrado=0;
   int codigo_disciplina_atualizar = 0;
   int resultado_atualizacao = 0;
-  char stringteste[50];
   int matricula;
   int matriculaprof;
   int icont=0;
@@ -41,143 +40,153 @@ int main(void) {
 
   printf("----Bem vindo ao Sistema Escolar----\n\n");
 
-  while (InicioCont != 0) {
-    TeladeInicio = TelaInicial();
-     
-    if (TeladeInicio == 1) {
-      InicioCont = 1;
-      MenuInicial= 8;
-      while(MenuInicial!=0){
-        MenuInicial = MenuPrincipal();
-          
-        switch (MenuInicial) {
-          case 0:{
-            MenuInicial=0;
-            break;
-          }
-          case 1:{
-            MenuAluno = MenudeAlunos();
-            
-            switch (MenuAluno) {
-              case 0:{
-                break;
-              }
-              
-              case 1:{
-              	InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-              	qtd_alunos_cadastrados++;
-              	break;
-              }
-              case 2:{
-              	ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-              	qtd_alunos_cadastrados--;
-              	break;
-              }
-				case 3:{
-					AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-					break;
-				}  
-            }
-              
-                
-            break;
-          }  
-          
-          case 2:{
-            
-            MenuProfessor = MenudeProfessores();
-            switch (MenuProfessor){
-              case 0:{
-                break;
-              }
-              case 1:{
-                InserirProfessor( ListaDeProfessor, qtd_prof_cadastrado);
-                qtd_prof_cadastrado++;
-                break;
-              }
-              case 2:{
-                ExcluirProfessor(ListaDeProfessor, qtd_prof_cadastrado);
-                qtd_prof_cadastrado--;
-                break;
-              }
-      		    case 3:{
-      			    AtualizarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
-      			    break;
-  		        }
-            
-            }
-            break;
-          }
-            
-          case 3:{
-            
-            
-            MenuDisciplina = MenudeDisciplina();
-            switch (MenuDisciplina)
-            { 
-              case 0:{
-                break;
-              }
-              case 1:{           
-                InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
-                qtd_disc_cadastrado++;
-                break;
-              }
-              case 2:{            
-                ExcluirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
-                qtd_disc_cadastrado--;
-                break;
-              }
-              case 3:{
-                AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, qtd_disc_cadastrado);
-                
-                
-                /* printf("\nAtualize o cadastro da disciplina: digite o código: \n");
-                scanf("%d", &codigo_disciplina_atualizar);
-                resultado_atualizacao = AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, qtd_disc_cadastrado);
-                if (resultado_atualizacao == 1)
-                  printf("\nDisciplina atualizada com sucesso\n");
-                else
-                  printf("\nErro na atualização da disciplina\n"); */
-                break;
-              } 
-            } 
-            break;
-          }  
-          
-          case 4:{
-            
-            MenuRelatorio = MenuRelatorios();
-            switch (MenuRelatorio){
-              case 0:{
-                break;
-              }
-              case 1:
-              {
-                ListarAlunos(ListaDeAlunos, qtd_alunos_cadastrados);
-                break;
-              }
-              case 2:{
-                ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
-                break;
-              }
-				case 6: {
-					ListarAlunosNome(ListaDeAlunos, qtd_alunos_cadastrados);
-					break;
+	while (InicioCont != 0) {
+		TeladeInicio = TelaInicial();
+	     
+	    if (TeladeInicio == 1) {
+			InicioCont = 1;
+			MenuInicial= 8;
+			while(MenuInicial!=0){
+				MenuInicial = MenuPrincipal();
+		          
+		        switch (MenuInicial) {
+					case 0:{
+						MenuInicial=0;
+						break;
+					}
+					case 1:{
+						//MÓDULO ALUNO
+						MenuAluno = MenudeAlunos();
+					
+			            switch (MenuAluno) {
+							case 0:{
+								break;
+							}		              
+							case 1:{
+								InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+								qtd_alunos_cadastrados++;
+								break;
+							}
+							case 2:{
+								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+								qtd_alunos_cadastrados--;
+								break;
+							}
+							case 3:{
+								AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+								break;
+							}  
+			            }	                
+		            	break;
+					}	          
+					case 2:{
+						//MÓDULO PROFESSOR
+						MenuProfessor = MenudeProfessores();
+						switch (MenuProfessor){
+							case 0:{
+								break;
+							}
+							case 1:{
+								InserirProfessor( ListaDeProfessor, qtd_prof_cadastrado);
+								qtd_prof_cadastrado++;
+								break;
+							}
+							case 2:{
+								ExcluirProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+								qtd_prof_cadastrado--;
+								break;
+							}
+							case 3:{
+								AtualizarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+								break;
+							}
+						
+						}
+						break;
+					}
+		            
+					case 3:{
+						//MÓDULO DISCIPLINA		
+						MenuDisciplina = MenudeDisciplina();
+						switch (MenuDisciplina){ 
+							case 0:{
+								break;
+							}
+							case 1:{           
+								InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeProfessor, qtd_prof_cadastrado);
+								qtd_disc_cadastrado++;
+								break;
+							}
+							case 2:{            
+								ExcluirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
+								qtd_disc_cadastrado--;
+								break;
+							}
+							case 3:{
+								AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, 								qtd_disc_cadastrado);
+								
+							
+								/* printf("\nAtualize o cadastro da disciplina: digite o código: \n");
+								scanf("%d", &codigo_disciplina_atualizar);
+								resultado_atualizacao = AtualizarDisciplina(ListaDeDisciplina, 										codigo_disciplina_atualizar, qtd_disc_cadastrado);
+								if (resultado_atualizacao == 1)
+								  printf("\nDisciplina atualizada com sucesso\n");
+								else
+								  printf("\nErro na atualização da disciplina\n"); */
+								break;
+							}
+							case 4:{
+								InserirTurma(ListaDeDisciplina, ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
+								break;
+							}
+						} 
+						break;
+					}  
+		          
+					case 4:{
+						//RELATÓRIOS
+						MenuRelatorio = MenuRelatorios();
+						switch (MenuRelatorio){
+							case 0:{
+								break;
+							}
+							case 1:{
+								ListarAlunos(ListaDeAlunos, qtd_alunos_cadastrados);
+								break;
+							}
+							case 2:{
+								ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+								break;
+							}
+							case 5:{
+								ListarAlunoSexo(ListaDeAlunos, qtd_alunos_cadastrados);	
+							}							
+							case 6: {
+								ListarAlunosNome(ListaDeAlunos, qtd_alunos_cadastrados);
+								break;
+							}
+							case 9:{
+								ListarProfessoresNome(ListaDeProfessor, qtd_prof_cadastrado);
+								break;
+							}
+							case 11:{
+								ListarAniversariantesDoMes(ListaDeProfessor, ListaDeAlunos, 																qtd_prof_cadastrado, qtd_alunos_cadastrados);              
+								break;
+							}
+							case 12:{
+								ListaDePessoas(ListaDeProfessor, ListaDeAlunos, qtd_prof_cadastrado, 				 					qtd_alunos_cadastrados);
+								break;
+						  
+						  	}
+						}
+						  break;
+					}
 				}
-				case 9:
-					ListarProfessoresNome(ListaDeProfessor, qtd_prof_cadastrado);
-					break;
-            }
-            break;
-          }
-        }
-      }
-    }
-    else if(TeladeInicio==0)
-      InicioCont=0;
+	    }
+	  }else if(TeladeInicio==0)
+	    InicioCont=0;
     
-  }
+	}
   printf("Programa Finalizado!");
   return 0;
 }
