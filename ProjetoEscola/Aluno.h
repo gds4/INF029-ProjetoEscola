@@ -8,11 +8,13 @@
 #define Tam_Data 12
 #define Tam_Nome_Disc 20
 #define Tam_Cpf 16
-#define Tam_Codigo 7
+#define Tam_Codigo 6
 #define QTD_Alunos 5
 #define QTD_Professor 5
 #define QTD_Disc 3
 #define Max_Materias 10
+
+
 
 typedef struct {
   char Matricula[Tam_Matricula];
@@ -20,14 +22,14 @@ typedef struct {
   char Sexo;
   char Cpf[Tam_Cpf];
   Data DataNasc;
-  char Materias [Max_Materias][Tam_Codigo];
-  int Qtd_Mat_Cadast;
+  int Qtd_Mat_Cadast[QTD_Disc];
 }Aluno;
 
 int MenudeAlunos();
-void InserirAluno(Aluno array[], int num);
-void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
+void InserirAluno(Aluno array[], int num,int qtd_disc_cadastrados);
+void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadastrado);
 void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
+int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrados);
 
 
 #endif

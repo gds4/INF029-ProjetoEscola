@@ -24,7 +24,7 @@ void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, 
   printf("\nInsira o nome da disciplina:\n");
   fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
 
-  ValidarCodigoDisc(ListaDeDisciplina[qtd_disc_cadastrado].Codigo);
+  ValidarCodigoDisc(&ListaDeDisciplina[qtd_disc_cadastrado].Codigo);
 
   ValidarSemestre(ListaDeDisciplina[qtd_disc_cadastrado].Semestre);
 
@@ -67,17 +67,17 @@ int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_at
               printf("\n\nDisciplina encontrada\n\n");              
         
               printf("\nInsira o novo nome da disciplina:\n");
-              fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
+              fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin);
               getchar();
             
               printf("\nInsira o novo código da disciplina:\n");
-              scanf("%d", &ListaDeDisciplina[qtd_disc_cadastrado].Codigo);
+              scanf("%d", &ListaDeDisciplina[i].Codigo);
                           
               printf("\nInsira o novo semestre\n");
-              scanf("%d", &ListaDeDisciplina[qtd_disc_cadastrado].Semestre);
+              scanf("%c", ListaDeDisciplina[i].Semestre);
                           
               printf("\nInsira a nome do novo professor correspondente à disciplina: \n");
-              fgets(ListaDeDisciplina[qtd_disc_cadastrado].Professor, Tam_Nome, stdin);
+              fgets(ListaDeDisciplina[i].Professor, Tam_Nome, stdin);
               getchar();
         }      
         encontrou = 1;
@@ -128,96 +128,117 @@ int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, con
     return 0;
 }
 void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast) {
-  
+  int posicao;
   int icont;
   int jcont;
-  int numAlunos = disciplina->NumAlunos;
-  char matricula[Tam_Matricula];
+  int sairdoloop1=1;
+  char matricula[10];
   int codigoDisciplina;
-
-  printf("Informe o código da disciplina para inserir a turma: ");
-  scanf("%d", &codigoDisciplina);
-  getchar();
-
-  for (jcont = 0; jcont < qtd_disc_cadast; jcont++)
-  {
-    if (disciplina[jcont].Codigo == codigoDisciplina) 
+  while(sairdoloop1!=0){
+    printf("Informe o código da disciplina para inserir a turma: ");
+    scanf("%d", &codigoDisciplina);
+    getchar();
+  
+    for (jcont = 0; jcont < qtd_disc_cadast; jcont++)
     {
-      printf("\nInserindo alunos na disciplina %s\n", disciplina->Nome);
-      int sairloop=1;
-      while (sairloop!=0) {
-        printf("\nInsira a matrícula do aluno (ou '0' para sair): ");
-        fgets(matricula,Tam_Matricula,stdin);
-        getchar();
-        int variavel = strlen(matricula);
-        
-        if (variavel == 6) {
-            if (verificarExistenciaMatricula(alunos, qtd_alunos_cadastrados, matricula)) {
-              strcpy(disciplina->Turma[numAlunos], matricula);
-              numAlunos++;
-              disciplina->NumAlunos = numAlunos;
-              printf("\nInserir novo aluno?\n");
-              printf("\n1 - Sim\n2 - Não\n");
-              int opcao = VerificacaoValorMenu(1,2);
-              if(opcao==1)
-              {
-                sairloop=1;                
-              }else if(opcao == 2){
-                sairloop=0;
-              }
-              
-            }else printf("\nMatrícula não existe no sistema. Tente novamente.\n");
-        }else printf("\nMatrícula inválida. Tente novamente.\n");
-      } 
+      if (disciplina[jcont].Codigo == codigoDisciplina) 
+      {
+        int numAlunos = disciplina[jcont].NumAlunos;
+        printf("\nInserindo alunos na disciplina %s\n", disciplina[jcont].Nome);
+        int sairloop2=1;
+        while (sairloop2!=0) {
+          printf("\nInsira a matrícula do aluno:\n ");
+          fgets(matricula,10,stdin);
+          delbar0(matricula);
+          int variavel = strlen(matricula);
+          
+          if (variavel == 6) {
+              if (verificarExistenciaMatricula(alunos, qtd_alunos_cadastrados, matricula)) {
+                posicao = BuscarPosicaoAluno(alunos, matricula, qtd_alunos_cadastrados);
+                alunos[posicao].Qtd_Mat_Cadast[jcont]=1;
+                strcpy(disciplina[jcont].Turma[numAlunos], matricula);
+                numAlunos++;
+                disciplina[jcont].NumAlunos = numAlunos;
+                printf("\nInserir novo aluno?\n");
+                printf("\n1 - Sim\n2 - Não\n");
+                int opcao = VerificacaoValorMenu(1,2);
+                if(opcao==1)
+                {
+                  sairloop2=1;                
+                }else if(opcao == 2){
+                  sairdoloop1=0;
+                  sairloop2=0;
+                }
+                
+              }else printf("\nMatrícula não existe no sistema. Tente novamente.\n");
+          }else printf("\nMatrícula inválida. Tente novamente.\n");
+        } 
+      }
+      if (jcont==qtd_disc_cadast-1 && disciplina[jcont].Codigo != codigoDisciplina)
+        printf("\nDisciplina não encontrada. Tente Novamente\n");
     }
   }
 }
 
-void ValidarCodigoDisc(int codigo){
+void ValidarCodigoDisc(int *codigo){
   int icont;
   int valido=1;
-  char input[Tam_Codigo];
+  char input[10];
   int somat=0;
   while(valido!=0){
-    
-    printf("\nInsira o código da Disciplina\n");
-    fgets(input,Tam_Codigo,stdin);
-    delbar0(input);
-    getchar();
-    puts(input);
     somat=0;
-    for(icont=0;icont<Tam_Codigo;icont++){
-      if(input[icont]>='0' && input[icont]<='9'){
-        somat++;
+    printf("\nInsira o código da Disciplina\n");
+    fgets(input,10,stdin);
+    delbar0(input);
+    int tam_input=strlen(input);
+    if(tam_input==5){
+      for(icont=0;input[icont]!='\0';icont++){
+        if(input[icont]>='0' && input[icont]<='9'){
+          somat++;
+        }
       }
-    }
-    if(somat==5){
-      codigo=atoi(input);
-      valido=0;
-    }else printf("\nCódigo Inválido! Tente Novamente.\n");
+      if(somat==5){
+        *codigo=atoi(input);
+        valido=0;
+      }else printf("\nCódigo inválido! Tente Novamente.\n");
+    }else printf("\nO código deve conter 5 digitos. Tente Novamente.\n");
   }
 }
 
 void ValidarSemestre(char input[]){
+  char validacao[10];
   int icont;
   int valido=1;
-  int somat=0;
+  int somat;
   while (valido!=0){
     printf("\nInforme o Semestre da disciplina:\n\n");
-    fgets(input,Tam_Semestre,stdin);
-    delbar0(input);
-    if(input[4]=='.'){
-      for(icont=0;icont<Tam_Semestre-1;icont++)
-        if(input[icont]>='0' || input[icont]<='9'){
-          somat++;
-          if(icont==3)
-            icont++;
-        }
-    }else printf("\nPadrão incorreto. Tente novamente\n");
-    printf("%d",somat);
-    if(somat==5){
-      valido=0;
-    }else printf("\nSemestre Inválido. Tente novamente\n");
+    fgets(validacao,10,stdin);
+    delbar0(validacao);
+    if(strlen(validacao)==6)
+    {
+      if(validacao[5]=='1' || validacao[5]=='2')
+      {
+        if(validacao[4]=='.')
+        {
+          somat=0;
+          for(icont=0;validacao[icont]!='\0';icont++)
+            if(validacao[icont]>='0' && validacao[icont]<='9')
+            {
+              somat++;
+              if(icont==3)
+                icont++;
+            }
+          if(somat==5)
+          {
+            strcpy(input,validacao);
+            valido=0;
+          }else printf("\nSemestre inválido. Tente novamente\n");
+          
+        }else printf("\nPadrão inválido. Tente novamente\n");
+        
+      }else printf("\nSemestre inválido. Tente novamente\n");
+      
+    }else printf("\nSemestre inválido. Tente novamente\n");
   }
 }
 
@@ -227,19 +248,30 @@ void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_pro
   int valido=1;
   char comparar[Tam_Nome];
   
-  while(valido!=0){
+  if(qtd_prof_cadast==0)
+  {
+    printf("\nNão existe professor cadastrado no sistema.\n\n");
+    valido=0;
+  }
+  
+  while(valido!=0)
+  {
     printf("\nInsira o nome do professor referente a disciplina\n\n");
     fgets(comparar,Tam_Nome,stdin);
     delbar0(comparar);
-    for(icont=0;icont<qtd_prof_cadast;icont++){
-      if(strcmp(comparar,ListaDeProfessor[icont].Nome)==0){
+    Existeprof=0;
+    for(icont=0;icont<qtd_prof_cadast;icont++)
+    {
+      if(strcmp(comparar,ListaDeProfessor[icont].Nome)==0)
+      {
         Existeprof=1;
+        break;
       }
     }
-
-    if(Existeprof==1){
+    if(Existeprof){
       strcpy(professor,comparar);
       valido=0;
     }else printf("Nome não encontrado. Tente novamente.\n");
   }
 }
+

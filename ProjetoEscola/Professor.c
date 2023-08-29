@@ -20,7 +20,8 @@ void InserirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
   ValidarMatricula(ListaDeProfessor[qtd_prof_cadastrado].Matricula);
   ValidarNome(ListaDeProfessor[qtd_prof_cadastrado].Nome);
   ValidarSexo(ListaDeProfessor[qtd_prof_cadastrado].Sexo);
-  ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,&ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
+  ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,
+	  &ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
   ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
 }
 
@@ -75,28 +76,20 @@ void AtualizarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
 
         switch (MenuAtualizarprof) {
         case 1:
-          printf("\nInforme a matrícula: ");
-          fgets(ListaDeProfessor[icont].Matricula, Tam_Matricula, stdin);
-          break;
+			ValidarMatricula(ListaDeProfessor[qtd_prof_cadastrado].Matricula);
+          	break;
 
         case 2:
-          printf("\nInforme o nome: ");
-          fgets(ListaDeProfessor[icont].Nome, Tam_Nome, stdin);
-          getchar();
-          break;
+			ValidarNome(ListaDeProfessor[qtd_prof_cadastrado].Nome);
+			break;
 
         case 3:
-          printf("\nInforme o CPF: ");
-          fgets(ListaDeProfessor[icont].Cpf, Tam_Cpf, stdin);
-          break;
+			ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
+			break;
 
         case 4:
-          printf("\nInforme a data de nascimento (apenas números): ");
-          scanf("%d %d %d", &ListaDeProfessor[icont].DataNasc.dia,
-                &ListaDeProfessor[icont].DataNasc.mes,
-                &ListaDeProfessor[icont].DataNasc.ano);
-			getchar();
-          break;
+			ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,&ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
+			break;
         }
       } else {
         // printf("Matrícula não encontrada!");

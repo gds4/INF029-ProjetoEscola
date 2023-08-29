@@ -31,7 +31,7 @@ int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_at
 void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int codigo);
 int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula);
 void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast);
-void ValidarCodigoDisc(int codigo);
+void ValidarCodigoDisc(int *codigo);
 void ValidarSemestre(char input[]);
 void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast);
 

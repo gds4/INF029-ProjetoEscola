@@ -38,7 +38,7 @@ int main(void) {
   int icont=0;
   int jcont=0;
 
-  printf("----Bem vindo ao Sistema Escolar----\n\n");
+  printf("----Bem vindo ao Sistema Escolar----\n");
 
 	while (InicioCont != 0) {
 		TeladeInicio = TelaInicial();
@@ -63,12 +63,12 @@ int main(void) {
 								break;
 							}		              
 							case 1:{
-								InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+								InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados,qtd_disc_cadastrado);
 								qtd_alunos_cadastrados++;
 								break;
 							}
 							case 2:{
-								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
 								qtd_alunos_cadastrados--;
 								break;
 							}
@@ -115,6 +115,7 @@ int main(void) {
 							case 1:{           
 								InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeProfessor, qtd_prof_cadastrado);
 								qtd_disc_cadastrado++;
+                
 								break;
 							}
 							case 2:{            
@@ -137,6 +138,7 @@ int main(void) {
 							}
 							case 4:{
 								InserirTurma(ListaDeDisciplina, ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
+                printf("%d",ListaDeAlunos[0].Qtd_Mat_Cadast[0]);
 								break;
 							}
 						} 
@@ -158,6 +160,13 @@ int main(void) {
 								ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
 								break;
 							}
+							case 4:{
+								char disciplina [Tam_Nome_Disc];
+								printf("\nInforme a disciplina: ");
+								fgets(disciplina,Tam_Nome_Disc,stdin);
+								ListarUmaDisciplina(ListaDeDisciplina, qtd_disc_cadastrado, disciplina);
+								break;
+							}
 							case 5:{
 								ListarAlunoSexo(ListaDeAlunos, qtd_alunos_cadastrados);	
 							}							
@@ -170,14 +179,18 @@ int main(void) {
 								break;
 							}
 							case 11:{
-								ListarAniversariantesDoMes(ListaDeProfessor, ListaDeAlunos, 																qtd_prof_cadastrado, qtd_alunos_cadastrados);              
+								ListarAniversariantesDoMes(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);              
 								break;
 							}
 							case 12:{
-								ListaDePessoas(ListaDeProfessor, ListaDeAlunos, qtd_prof_cadastrado, 				 					qtd_alunos_cadastrados);
+								ListaDePessoas(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
 								break;
 						  
 						  	}
+							case 13:{
+								ListarAlunosMatriculadosDisc(ListaDeAlunos, qtd_alunos_cadastrados);
+								break;
+							}
 						}
 						  break;
 					}
@@ -187,7 +200,7 @@ int main(void) {
 	    InicioCont=0;
     
 	}
-  printf("Programa Finalizado!");
+  printf("\nPrograma Finalizado!");
   return 0;
 }
 
@@ -196,7 +209,7 @@ int main(void) {
 int TelaInicial(){
   int TeladeInicio;
   
-  printf("Para Continuar aperte '1'\n");
+  printf("\nPara Continuar aperte '1'\n");
   printf("Para Sair aperte '0'\n");
   TeladeInicio = VerificacaoValorMenu(0,1);
   

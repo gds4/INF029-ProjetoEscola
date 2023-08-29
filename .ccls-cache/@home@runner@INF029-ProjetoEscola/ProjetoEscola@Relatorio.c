@@ -23,6 +23,7 @@ int MenuRelatorios(){
   printf("  12 > Lista de pessoas (alunos e professores) \n");
   printf("  13 > Lista de alunos matriculados em menos de 3 disciplinas \n");
   printf("  14 > Lista de Disciplinas, com nome do professor, que extrapolam 40 vagas. \n");
+  printf("  15 > Listar disciplinas que aluno está matriculado \n");
   MenuRelatorio=VerificacaoValorMenu(0,14);
 
   return MenuRelatorio;
@@ -100,19 +101,19 @@ void ListarDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
     printf("\nLista de Disciplinas\n");
     puts(ListaDeDisciplina[icont].Nome);
     printf("%d \n", ListaDeDisciplina[icont].Codigo);
-    printf("%d  \n", ListaDeDisciplina[icont].Semestre);
+    printf("%s  \n", ListaDeDisciplina[icont].Semestre);
     printf("%s \n", ListaDeDisciplina[icont].Professor);
       //lista de alunos em cada disciplina
   }
 }   
 
-void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado, int disciplina){
+void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado, char disciplina[]){
   int icont;  
   for(icont = 0; icont < qtd_disc_cadastrado; icont++)
-  {
+  {										
     if (ListaDeDisciplina[icont].Nome == disciplina)
     {
-       printf("%-9s %-30s %-4c %-15s \n",  ListaDeDisciplina[icont].Nome,  
+       printf("%-9s %-d %-4s %-15s \n",  ListaDeDisciplina[icont].Nome,  
                                            ListaDeDisciplina[icont].Codigo,     
                                            ListaDeDisciplina[icont].Semestre,  
                                            ListaDeDisciplina[icont].Professor);     
@@ -165,9 +166,6 @@ void ListarAlunosNome(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
 		strcpy(&ListaDeAlunosPorNome[icont].Sexo, &ListaDeAlunos[icont].Sexo);
 		strcpy(ListaDeAlunosPorNome[icont].Cpf, ListaDeAlunos[icont].Cpf);
 		strcpy(ListaDeAlunosPorNome[icont].DataNasc.str_data, ListaDeAlunos[icont].DataNasc.str_data);
-		/*ListaDeAlunosPorNome[icont].DataNasc.dia = ListaDeAlunos[icont].DataNasc.dia;
-		ListaDeAlunosPorNome[icont].DataNasc.mes = ListaDeAlunos[icont].DataNasc.mes;
-		ListaDeAlunosPorNome[icont].DataNasc.dia = ListaDeAlunos[icont].DataNasc.ano;*/
 	}
 	
 	for(icont = 0; icont < qtd_alunos_cadastrados - 1;icont++){
@@ -345,18 +343,46 @@ void ListaDePessoas(Professor ListaDeProfessor[], int qtd_prof_cadastrado, Aluno
   
 }
 
-/*void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado){
+void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast){
   int icont;
-  int contDisc = 0;
-  char aluno[Tam_Nome];
-  printf("Digite o nome do aluno:\n");
-  fgets(aluno,Tam_Nome,stdin);
+  int jcont;
+  int somat;
+  int alunosprintados=0;
+  for (icont = 0; icont < qtd_alunos_cadastrados; icont++){
+    somat=0;
+    for(jcont=0;ListaDeAlunos[icont].Qtd_Mat_Cadast[jcont]<qtd_disc_cadast;jcont++)
+    {
+      somat++;
+    }
+    if (somat < 3)
+    {      
+        printf("%-9s %-30s %-4c %-15s %-10s\n",ListaDeAlunos[icont].Matricula,
+                                               ListaDeAlunos[icont].Nome, 
+                                               ListaDeAlunos[icont].Sexo, 
+                                               ListaDeAlunos[icont].Cpf,
+										                           ListaDeAlunos[icont].DataNasc.str_data);
+        alunosprintados++;
+    }
+    if(icont==qtd_alunos_cadastrados-1 && alunosprintados==0)
+      printf("\nNão há alunos matriculados em menos de 3 disciplinas");
+      
+  }
 
-comparar = strcmp(ListaDeAlunosPorNome[icont].Nome, ListaDeAlunosPorNome[jcont].Nome);
-			if(comparar > 0){
-				strcpy(aux[icont].Nome, ListaDeAlunosPorNome[icont].Nome);
-				strcpy(aux[icont].Matricula, ListaDeAlunosPorNome[icont].Matricula);
-				strcpy(&aux[icont].Sexo, &ListaDeAlunosPorNome[icont].Sexo);
-				strcpy(aux[icont].DataNasc.str_data, ListaDeAlunos[icont].DataNasc.str_data);
-  
+}
+
+/*void ListarDiscDeAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
+  char aluno[Tam_Nome];
+  char comparar;
+  int icont;  
+  printf("Digite o nome do estudante:\n");
+  fgets(aluno, sizeof(Tam_Nome), stdin);
+  for (icont = 0; icont < qtd_alunos_cadastrados; icont++){
+    comparar = strcmp(ListaDeAlunos[icont].Nome, aluno);
+  	if(comparar > 0){
+      printf("---------------------------------");
+      printf("\n%s", ListaDeAlunos[icont].Nome);
+      printf("\n%s\n", ListaDeDisciplina[icont].Nome);
+      printf("---------------------------------");
+        }
+          }
 }*/

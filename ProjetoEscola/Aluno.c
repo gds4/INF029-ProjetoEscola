@@ -4,6 +4,7 @@
 #include "Data.h"
 #include "FuncoesUsoGeral.h"
 #include "Aluno.h"
+#include "Disciplina.h"
 
 int MenudeAlunos(){
   int MenuAluno;
@@ -16,20 +17,25 @@ int MenudeAlunos(){
   return MenuAluno;
 }
 
-void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
-  
+void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadastrados){
+  int icont;
 	ValidarMatricula(ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
 	ValidarNome(ListaDeAlunos[qtd_alunos_cadastrados].Nome);
 	ValidarSexo(ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
 	ValidarData(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data,&ListaDeAlunos[qtd_alunos_cadastrados].DataNasc);
 	ValidarCPF(ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
-  
+  for(icont=0;icont<qtd_disc_cadastrados;icont++)
+    ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[icont]=0;
   
 }
 
-void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
+void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadastrado){
   int icont;
   int jcont;
+  int kcont;
+  int lcont;
+  int mcont;
+  int ncont;
   char matricula[Tam_Matricula];
   printf("Insira a Matrícula do Aluno");
   fgets(matricula,Tam_Matricula,stdin);
@@ -40,15 +46,27 @@ void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
       if(icont!=qtd_alunos_cadastrados-1)
       {
         for(jcont=icont+1;jcont<qtd_alunos_cadastrados;jcont++)
-        {
+        {  
+          /*for(lcont=0;lcont<qtd_disc_cadastrado;lcont++){
+            if(ListaDeAlunos[jcont-1].Qtd_Mat_Cadast[lcont]==1)
+              for(mcont=0;mcont<ListaDeDisciplina[lcont].NumAlunos;mcont++)
+                if(strcmp(ListaDeDisciplina[lcont].Turma[mcont],matricula)==0)
+                  for(ncont=mcont+1;ncont<ListaDeDisciplina[lcont].NumAlunos;ncont++)
+                    strcpy(ListaDeDisciplina[lcont].Turma[ncont-1],ListaDeDisciplina[lcont].Turma[ncont]);
+          }*/
           strcpy(ListaDeAlunos[jcont-1].Matricula,ListaDeAlunos[jcont].Matricula);
-          strcpy(ListaDeAlunos[jcont-1].Cpf,ListaDeAlunos[jcont].Cpf);
           strcpy(ListaDeAlunos[jcont-1].Nome,ListaDeAlunos[jcont].Nome);
+          strcpy(ListaDeAlunos[jcont-1].Cpf,ListaDeAlunos[jcont].Cpf);
           ListaDeAlunos[jcont-1].Sexo=ListaDeAlunos[jcont].Sexo;
           strcpy(ListaDeAlunos[jcont-1].DataNasc.str_data,ListaDeAlunos[jcont].DataNasc.str_data);
           ListaDeAlunos[jcont-1].DataNasc.dia=ListaDeAlunos[jcont].DataNasc.dia;
           ListaDeAlunos[jcont-1].DataNasc.mes=ListaDeAlunos[jcont].DataNasc.mes;
           ListaDeAlunos[jcont-1].DataNasc.ano=ListaDeAlunos[jcont].DataNasc.ano;
+          for(kcont=0;kcont < qtd_disc_cadastrado;kcont++){
+            ListaDeAlunos[jcont-1].Qtd_Mat_Cadast[kcont]=ListaDeAlunos[jcont].Qtd_Mat_Cadast[kcont];
+          }
+            
+            
         }
       }
     }
@@ -106,4 +124,11 @@ void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
     }
 }
 
-
+int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrados){
+  int icont;
+  int posicao=-1;
+  for(icont=0;icont<qtd_alunos_cadastrados;icont++)
+    if(strcmp(matricula, alunos[icont].Matricula)==0)
+      posicao = icont;
+  return posicao;
+}
