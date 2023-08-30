@@ -31,5 +31,5 @@ void InserirTurma (Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadast
 void ValidarCodigoDisc (int *codigo);
 void ValidarSemestre (char input[]);
 void ValidarNomeProf (char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast);
-
+void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor ListaDeProfessor[],int qtd_prof_cadastrado,Disciplina ListaDeDisciplina[],int qtd_disc_cadastrado);
 #endif

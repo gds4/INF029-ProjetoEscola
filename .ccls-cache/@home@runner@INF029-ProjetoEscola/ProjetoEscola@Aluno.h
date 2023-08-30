@@ -31,6 +31,6 @@ void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,
     int qtd_disc_cadastrado); //, Disciplina ListaDeDisciplinas[]);
 void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrados);
-void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados);
+
 
 #endif

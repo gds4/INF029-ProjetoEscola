@@ -14,12 +14,14 @@ int VerificacaoValorMenu(int num1, int num2) {
   int icont;
   int valido = -1;
   int verificado = -1;
-  int validacao = 0;
+  
   char str_verif[100];
   while (valido != 0) {
     fgets(str_verif, 100, stdin);
     delbar0(str_verif);
     int comprimento = strlen(str_verif);
+    int validacao = 0;
+    
     if (comprimento == 1 || comprimento == 2) {
       for (icont = 0; icont < comprimento; icont++)
         if (str_verif[icont] >= '0' && str_verif[icont] <= '9') {

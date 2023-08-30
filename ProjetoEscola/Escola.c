@@ -37,9 +37,10 @@ int main(void) {
   int matriculaprof;
   int icont=0;
   int jcont=0;
-  PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados);
+  PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados,ListaDeProfessor,qtd_prof_cadastrado,ListaDeDisciplina,qtd_disc_cadastrado);
   qtd_alunos_cadastrados=6;
   qtd_prof_cadastrado=4;
+  qtd_disc_cadastrado=4;
   printf("----Bem vindo ao Sistema Escolar----\n");
 
 	while (InicioCont != 0) {
