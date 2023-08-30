@@ -37,7 +37,9 @@ int main(void) {
   int matriculaprof;
   int icont=0;
   int jcont=0;
-
+  PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados);
+  qtd_alunos_cadastrados=6;
+  qtd_prof_cadastrado=4;
   printf("----Bem vindo ao Sistema Escolar----\n");
 
 	while (InicioCont != 0) {
@@ -68,7 +70,7 @@ int main(void) {
 								break;
 							}
 							case 2:{
-								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
+								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);//, ListaDeDisciplina);
 								qtd_alunos_cadastrados--;
 								break;
 							}
@@ -124,8 +126,8 @@ int main(void) {
 								break;
 							}
 							case 3:{
-								AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, 								qtd_disc_cadastrado);
-								
+								//AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, 								qtd_disc_cadastrado);
+								AtualizarDisciplina(ListaDeDisciplina, ListaDeProfessor, codigo_disciplina_atualizar, qtd_disc_cadastrado, qtd_prof_cadastrado);
 							
 								/* printf("\nAtualize o cadastro da disciplina: digite o código: \n");
 								scanf("%d", &codigo_disciplina_atualizar);
@@ -169,9 +171,14 @@ int main(void) {
 							}
 							case 5:{
 								ListarAlunoSexo(ListaDeAlunos, qtd_alunos_cadastrados);	
+                				break;
 							}							
 							case 6: {
 								ListarAlunosNome(ListaDeAlunos, qtd_alunos_cadastrados);
+								break;
+							}
+							case 7: {
+								ListarAlunoDataNasc(ListaDeAlunos, qtd_alunos_cadastrados);
 								break;
 							}
 							case 9:{
@@ -185,7 +192,6 @@ int main(void) {
 							case 12:{
 								ListaDePessoas(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
 								break;
-						  
 						  	}
 							case 13:{
 								ListarAlunosMatriculadosDisc(ListaDeAlunos, qtd_alunos_cadastrados);
@@ -220,7 +226,7 @@ int MenuPrincipal(){
   int MenuInicial;
   
   printf("\nSelecione a opção desejada:\n");
-  printf("\n* Para selecionar a opção, pressione o valor referente a mesma:\n\n");
+  printf("\n* Para selecionar, pressione o valor correspondente à opção:\n\n");
   printf("0 - Retornar\n");
   printf("1 - Módulo Aluno\n");
   printf("2 - Módulo Professor\n");

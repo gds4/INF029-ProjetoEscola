@@ -46,6 +46,7 @@ void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
 	}
 }
 
+
 void ListarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado){
   int icont;
   printf("%-9s %-30s %-4s %-15s %-10s\n", "Matrícula", "Nome", "Sexo", "CPF",     
@@ -106,6 +107,7 @@ void ListarDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
       //lista de alunos em cada disciplina
   }
 }   
+
 
 void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado, char disciplina[]){
   int icont;  
@@ -370,19 +372,61 @@ void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastra
 
 }
 
-/*void ListarDiscDeAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
+void ListarDiscDeAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
   char aluno[Tam_Nome];
   char comparar;
-  int icont;  
-  printf("Digite o nome do estudante:\n");
-  fgets(aluno, sizeof(Tam_Nome), stdin);
-  for (icont = 0; icont < qtd_alunos_cadastrados; icont++){
-    comparar = strcmp(ListaDeAlunos[icont].Nome, aluno);
-  	if(comparar > 0){
-      printf("---------------------------------");
-      printf("\n%s", ListaDeAlunos[icont].Nome);
-      printf("\n%s\n", ListaDeDisciplina[icont].Nome);
-      printf("---------------------------------");
-        }
-          }
-}*/
+  int icont;
+  int sairloop=1;
+  int posicao;
+  while(sairloop!=0){
+    printf("Digite o nome do estudante:\n");
+    fgets(aluno, sizeof(Tam_Nome), stdin);
+    delbar0(aluno);
+    posicao=BuscarPosicaoAluno(ListaDeAlunos, aluno, qtd_alunos_cadastrados);
+    if(posicao>=0){
+      for (icont = 0; icont < qtd_disc_cadastrado; icont++){
+       	if(ListaDeAlunos[posicao].Qtd_Mat_Cadast[icont]==1){
+          printf("---------------------------------");
+          printf("\n%s", ListaDeAlunos[posicao].Nome);
+          printf("\n%s\n", ListaDeDisciplina[icont].Nome);
+          printf("---------------------------------");
+      sairloop=1;
+      }
+      }
+    }else printf("\nMatrícula Inválida. Tente Novamente.\n");
+  }
+}
+
+
+int CompareAlunosPorDataNasc(const void *a, const void *b) {
+    const Aluno *alunoA = (const Aluno *)a;
+    const Aluno *alunoB = (const Aluno *)b;
+
+    if (alunoA->DataNasc.ano != alunoB->DataNasc.ano) {
+        return alunoA->DataNasc.ano - alunoB->DataNasc.ano;
+    }
+    if (alunoA->DataNasc.mes != alunoB->DataNasc.mes) {
+        return alunoA->DataNasc.mes - alunoB->DataNasc.mes;
+    }
+    return alunoA->DataNasc.dia - alunoB->DataNasc.dia;
+}
+
+void ListarAlunoDataNasc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados) {
+    
+    Aluno ListaAlunosNasc[qtd_alunos_cadastrados];
+    memcpy(ListaAlunosNasc, ListaDeAlunos, sizeof(Aluno) * qtd_alunos_cadastrados);
+   
+    qsort(ListaAlunosNasc, qtd_alunos_cadastrados, sizeof(Aluno), CompareAlunosPorDataNasc);
+
+    printf("\n%-9s %-30s %-4s %-15s %-10s\n", "Matrícula", "Nome", "Sexo", "CPF", "Nascimento");
+    printf("--------- ------------------------------ ---- --------------- ----------\n");
+
+    for (int icont = 0; icont < qtd_alunos_cadastrados; icont++) {
+        printf("%-9s %-30s %-4c %-15s %-10s\n",
+               ListaAlunosNasc[icont].Matricula,
+               ListaAlunosNasc[icont].Nome,
+               ListaAlunosNasc[icont].Sexo,
+               ListaAlunosNasc[icont].Cpf,
+               ListaAlunosNasc[icont].DataNasc.str_data);
+    }
+}

@@ -21,3 +21,4 @@ void ListarProfessoresNome(Professor ListaDeProfessor[], int qtd_prof_cadastrado
 void ListarAniversariantesDoMes(Professor ListaDeProfessor[], int qtd_prof_cadastrado, Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListaDePessoas(Professor ListaDeProfessor[], int qtd_prof_cadastrado, Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
+void ListarAlunoDataNasc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);

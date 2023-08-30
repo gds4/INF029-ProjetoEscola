@@ -9,10 +9,10 @@
 int MenudeDisciplina(){
   int MenuDisciplina;
   printf("\n  0 > Retornar\n");
-  printf("  1 > Inserir Disciplina \n");
-  printf("  2 > Excluir Disciplina \n");
-  printf("  3 > Atualizar Cadastro da Disciplina \n");
-  printf("  4 > Inserir Turma\n");
+  printf("  1 > Inserir disciplina \n");
+  printf("  2 > Excluir disciplina \n");
+  printf("  3 > Atualizar cadastro da disciplina \n");
+  printf("  4 > Inserir turma\n");
   MenuDisciplina=VerificacaoValorMenu(0,4);
   getchar();
 
@@ -53,36 +53,41 @@ void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, 
     return 1;
   }
   return 0;
-}*/
+} */
 
-int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado) {
+    
+
+int AtualizarDisciplina(Disciplina ListaDeDisciplina[], Professor ListaDeProfessor[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado, int qtd_prof_cadast) {
     int encontrou = 0;
     int i, j;
     int codigo;
     printf("\n Insira o código da disciplina que deseja atualizar: \n");
     scanf("%d", &codigo);
-	  getchar();
+	getchar();
     for (i=0; i< qtd_disc_cadastrado; i++){
       if(ListaDeDisciplina[i].Codigo == codigo){
               printf("\n\nDisciplina encontrada\n\n");              
         
               printf("\nInsira o novo nome da disciplina:\n");
+              //fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin);
               fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin);
-              getchar();
             
               printf("\nInsira o novo código da disciplina:\n");
               scanf("%d", &ListaDeDisciplina[i].Codigo);
+              ValidarCodigoDisc(&ListaDeDisciplina[i].Codigo);
                           
               printf("\nInsira o novo semestre\n");
               scanf("%c", ListaDeDisciplina[i].Semestre);
+              ValidarSemestre(ListaDeDisciplina[i].Semestre);
                           
               printf("\nInsira a nome do novo professor correspondente à disciplina: \n");
               fgets(ListaDeDisciplina[i].Professor, Tam_Nome, stdin);
-              getchar();
+              ValidarNomeProf(ListaDeDisciplina[i].Professor ,ListaDeProfessor, qtd_prof_cadast);
+              
+              encontrou = 1;
+              break; 
         }      
-        encontrou = 1;
-        break; 
-      }
+    }
     if (encontrou){
             printf("Disciplina atualizada com sucesso\n ");
             
@@ -175,7 +180,7 @@ void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastr
         } 
       }
       if (jcont==qtd_disc_cadast-1 && disciplina[jcont].Codigo != codigoDisciplina)
-        printf("\nDisciplina não encontrada. Tente Novamente\n");
+        printf("\nDisciplina não encontrada. Tente novamente\n");
     }
   }
 }
@@ -187,7 +192,7 @@ void ValidarCodigoDisc(int *codigo){
   int somat=0;
   while(valido!=0){
     somat=0;
-    printf("\nInsira o código da Disciplina\n");
+    printf("\nInsira o código da disciplina\n");
     fgets(input,10,stdin);
     delbar0(input);
     int tam_input=strlen(input);
@@ -200,8 +205,8 @@ void ValidarCodigoDisc(int *codigo){
       if(somat==5){
         *codigo=atoi(input);
         valido=0;
-      }else printf("\nCódigo inválido! Tente Novamente.\n");
-    }else printf("\nO código deve conter 5 digitos. Tente Novamente.\n");
+      }else printf("\nCódigo inválido! Tente novamente.\n");
+    }else printf("\nO código deve conter 5 digitos. Tente novamente.\n");
   }
 }
 
@@ -211,7 +216,7 @@ void ValidarSemestre(char input[]){
   int valido=1;
   int somat;
   while (valido!=0){
-    printf("\nInforme o Semestre da disciplina:\n\n");
+    printf("\nInforme o semestre da disciplina:\n\n");
     fgets(validacao,10,stdin);
     delbar0(validacao);
     if(strlen(validacao)==6)

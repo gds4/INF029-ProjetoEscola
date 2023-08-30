@@ -9,9 +9,9 @@
 int MenudeAlunos(){
   int MenuAluno;
   printf("\n  0 > Retornar\n");
-  printf("  1 > Inserir Aluno \n");
-  printf("  2 > Excluir Aluno \n");
-  printf("  3 > Atualizar Cadastro do Aluno \n");
+  printf("  1 > Inserir aluno \n");
+  printf("  2 > Excluir aluno \n");
+  printf("  3 > Atualizar cadastro do aluno \n");
   MenuAluno = VerificacaoValorMenu(0,3);
   
   return MenuAluno;
@@ -29,7 +29,7 @@ void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc
   
 }
 
-void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadastrado){
+void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadastrado){//, Disciplina ListaDeDisciplinas[]){
   int icont;
   int jcont;
   int kcont;
@@ -37,7 +37,7 @@ void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc
   int mcont;
   int ncont;
   char matricula[Tam_Matricula];
-  printf("Insira a Matrícula do Aluno");
+  printf("Insira a matrícula do aluno");
   fgets(matricula,Tam_Matricula,stdin);
   for(icont=0;icont<qtd_alunos_cadastrados+1;icont++)
   {
@@ -79,7 +79,7 @@ void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
   int sair = 0;
   char matricula[Tam_Matricula];
   int MenuAtualizar;
-  printf("Insira a Matrícula do Aluno: ");
+  printf("Insira a matrícula do aluno: ");
   fgets(matricula,Tam_Matricula,stdin);
 
     while(!sair){
@@ -131,4 +131,138 @@ int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrad
     if(strcmp(matricula, alunos[icont].Matricula)==0)
       posicao = icont;
   return posicao;
+}
+
+
+void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados){
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202301");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Maria Santos");
+  ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'F';
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Cpf, "987.654.321-00");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data, "20/11/2002");
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia = 20;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes = 11;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano = 2002;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[0] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[1] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[2] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 1;
+
+  qtd_alunos_cadastrados++;
+
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202302");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Joao Silva");
+  ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'M';
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Cpf, "932.615.341-01");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data, "11/04/2001");
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia = 11;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes = 04;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano = 2001;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[0] = 0;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[1] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[2] = 0;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 0;
+  qtd_alunos_cadastrados++;
+
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202201");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Claudio Santos");
+  ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'M';
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Cpf, "912.621.521-01");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data, "03/03/1999");
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia = 03;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes = 03;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano = 1999;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[0] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[1] = 0;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[2] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 0;
+  qtd_alunos_cadastrados++;
+
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202202");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Juliana Oliveira");
+  ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'F';
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Cpf, "127.654.356-05");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data, "01/01/2001");
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia = 01;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes = 01;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano = 2001;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[0] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[1] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[2] = 0;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 0;
+  qtd_alunos_cadastrados++;
+
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202102");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Claudineia Azevedo");
+  ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'F';
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Cpf, "220.376.982-02");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data, "01/06/1997");
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia = 01;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes = 06;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano = 1997;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[0] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[1] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[2] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 0;
+  qtd_alunos_cadastrados++;
+  
+
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202101");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Clodovil Oliveira");
+  ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'M';
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Cpf, "349.031.843-00");
+  strcpy(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data, "03/10/1998");
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.dia = 03;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.mes = 10;
+  ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.ano = 1998;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[0] = 1;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[1] = 0;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[2] = 0;
+  ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 1;
+  qtd_alunos_cadastrados++;
+
+  /*strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202101");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Nome, "Clodovil Oliveira");
+  ListaDeProfessor[qtd_prof_cadastrado].Sexo = 'M';
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Cpf, "349.731.843-00");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data, "03/10/1998");
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.dia = 03;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.mes = 10;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.ano = 1998;
+  qtd_prof_cadastrado++;
+
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202110");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Nome, "Mario Antonio");
+  ListaDeProfessor[qtd_prof_cadastrado].Sexo = 'M';
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Cpf, "349.031.123-00");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data, "17/04/1982");
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.dia = 17;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.mes = 04;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.ano = 1982;
+  qtd_prof_cadastrado++;
+
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202103");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Nome, "Maria Antonieta dos Santos");
+  ListaDeProfessor[qtd_prof_cadastrado].Sexo = 'F';
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Cpf, "169.031.843-00");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data, "02/12/1970");
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.dia = 02;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.mes = 12;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.ano = 1970;
+  qtd_prof_cadastrado++;
+
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202112");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Nome, "Ana Maria Oliveira");
+  ListaDeProfessor[qtd_prof_cadastrado].Sexo = 'F';
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Cpf, "349.077.773-07");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data, "27/02/1988");
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.dia = 27;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.mes = 02;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.ano = 1988;
+  qtd_prof_cadastrado++;
+
+  ListaDeDisciplina[qtd_disc_cadastrad]
+*/
+
+
 }

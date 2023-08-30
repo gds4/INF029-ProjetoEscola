@@ -6,14 +6,11 @@
 
 #define Max_Aluno_Turma 60
 #define Tam_Nome 101
-#define Tam_Data 12
 #define Tam_Semestre 7
 #define Tam_Nome_Disc 20
 #define Tam_Matricula 7
 #define Tam_Cpf 16
-#define QTD_Alunos 5
-#define QTD_Professor 5
-#define QTD_Disc 3
+
 
 
 typedef struct{
@@ -27,12 +24,12 @@ typedef struct{
 
 int MenudeDisciplina();
 void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado,Professor ListaDeProfessor[],int qtd_prof_cadast);
-int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado) ;
-void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int codigo);
-int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula);
-void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast);
-void ValidarCodigoDisc(int *codigo);
-void ValidarSemestre(char input[]);
-void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast);
+int AtualizarDisciplina (Disciplina ListaDeDisciplina[], Professor ListaDeProfessor[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado, int qtd_prof_cadast);
+void ExcluirDisciplina (Disciplina ListaDeDisciplina[], int codigo);
+int verificarExistenciaMatricula (Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula);
+void InserirTurma (Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast);
+void ValidarCodigoDisc (int *codigo);
+void ValidarSemestre (char input[]);
+void ValidarNomeProf (char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast);
 
 #endif

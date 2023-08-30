@@ -10,7 +10,7 @@
 #define Tam_Cpf 16
 #define QTD_Alunos 5
 #define QTD_Professor 5
-#define QTD_Disc 3
+#define QTD_Disc 5
 
 typedef struct {
   char Matricula[Tam_Matricula];
