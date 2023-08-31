@@ -9,11 +9,6 @@
 
 int TelaInicial();
 int MenuPrincipal();
-void delbar0(char string[]);
-
-//enum MENU_OPCOES_DISCIPLINA {
-//  INSERIR_DISCIPLINA = 1, ATUALIZAR_DISCIPLINA = 2
-//};
 
 
 int main(void) {
@@ -41,6 +36,8 @@ int main(void) {
   qtd_alunos_cadastrados=6;
   qtd_prof_cadastrado=4;
   qtd_disc_cadastrado=4;
+
+  int numero_limite_Alunos = 1;
   printf("----Bem vindo ao Sistema Escolar----\n");
 
 	while (InicioCont != 0) {
@@ -61,7 +58,8 @@ int main(void) {
 						//MÓDULO ALUNO
 						MenuAluno = MenudeAlunos();
 					
-			            switch (MenuAluno) {
+			            switch (MenuAluno) 
+                  {
 							case 0:{
 								break;
 							}		              
@@ -71,7 +69,7 @@ int main(void) {
 								break;
 							}
 							case 2:{
-								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);//, ListaDeDisciplina);
+								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado, ListaDeDisciplina);
 								qtd_alunos_cadastrados--;
 								break;
 							}
@@ -122,21 +120,12 @@ int main(void) {
 								break;
 							}
 							case 2:{            
-								ExcluirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
+								ExcluirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
 								qtd_disc_cadastrado--;
 								break;
 							}
 							case 3:{
-								//AtualizarDisciplina(ListaDeDisciplina, codigo_disciplina_atualizar, 								qtd_disc_cadastrado);
-								AtualizarDisciplina(ListaDeDisciplina, ListaDeProfessor, codigo_disciplina_atualizar, qtd_disc_cadastrado, qtd_prof_cadastrado);
-							
-								/* printf("\nAtualize o cadastro da disciplina: digite o código: \n");
-								scanf("%d", &codigo_disciplina_atualizar);
-								resultado_atualizacao = AtualizarDisciplina(ListaDeDisciplina, 										codigo_disciplina_atualizar, qtd_disc_cadastrado);
-								if (resultado_atualizacao == 1)
-								  printf("\nDisciplina atualizada com sucesso\n");
-								else
-								  printf("\nErro na atualização da disciplina\n"); */
+								AtualizarDisciplina(ListaDeDisciplina, ListaDeProfessor, codigo_disciplina_atualizar, qtd_disc_cadastrado, qtd_prof_cadastrado);							
 								break;
 							}
 							case 4:{
@@ -162,12 +151,13 @@ int main(void) {
 							case 2:{
 								ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
 								break;
-							}
+							}              
+							case 3:{
+								ListarDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
+								break;
+              }  
 							case 4:{
-								char disciplina [Tam_Nome_Disc];
-								printf("\nInforme a disciplina: ");
-								fgets(disciplina,Tam_Nome_Disc,stdin);
-								ListarUmaDisciplina(ListaDeDisciplina, qtd_disc_cadastrado, disciplina);
+								ListarUmaDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeAlunos,qtd_alunos_cadastrados);
 								break;
 							}
 							case 5:{
@@ -182,9 +172,17 @@ int main(void) {
 								ListarAlunoDataNasc(ListaDeAlunos, qtd_alunos_cadastrados);
 								break;
 							}
+							case 8:{
+								ListarProfessorSexo(ListaDeProfessor, qtd_prof_cadastrado);
+								break;
+							}
 							case 9:{
 								ListarProfessoresNome(ListaDeProfessor, qtd_prof_cadastrado);
 								break;
+							}
+							case 10:{
+								ListarProfDataNasc(ListaDeProfessor, qtd_prof_cadastrado);
+                break;
 							}
 							case 11:{
 								ListarAniversariantesDoMes(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);              
@@ -195,7 +193,11 @@ int main(void) {
 								break;
 						  	}
 							case 13:{
-								ListarAlunosMatriculadosDisc(ListaDeAlunos, qtd_alunos_cadastrados);
+								ListarAlunosMatriculadosDisc(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
+								break;
+							}
+							case 14:{
+								ImprimeDisciplinaExtrapolaAlunos(ListaDeDisciplina, numero_limite_Alunos);                
 								break;
 							}
 						}
@@ -227,12 +229,12 @@ int MenuPrincipal(){
   int MenuInicial;
   
   printf("\nSelecione a opção desejada:\n");
-  printf("\n* Para selecionar, pressione o valor correspondente à opção:\n\n");
+  printf("\n* Para selecionar, pressione o valor correspondente a opção:\n\n");
   printf("0 - Retornar\n");
   printf("1 - Módulo Aluno\n");
   printf("2 - Módulo Professor\n");
   printf("3 - Módulo Disciplina\n");
-  printf("4 - Relatorios\n");
+  printf("4 - Relatórios\n");
   MenuInicial= VerificacaoValorMenu(0,4);
 
   return MenuInicial;

@@ -6,19 +6,21 @@
 #define Tam_Data 12
 #define Tam_Nome_Disc 20
 #define Tam_Cpf 16
-#define QTD_Alunos 5
-#define QTD_Professor 5
+
 
 
 int MenuRelatorios();
 void ListarAlunos(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado);
-void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado, int disciplina);
+void ListarDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado);
+void ListarUmaDisciplina(Disciplina ListaDeDisciplina[] , int qtd_disc_cadastrado,const Aluno ListaDeAluno[],int qtd_alunos_cadastrados);
 void ListarAlunoSexo(Aluno ListaDeAluno[], int qtd_alunos_cadastrados);
 void ListarProfessorSexo (Professor ListaDeProfessor[], int qtd_prof_cadastrado);
 void ListarAlunosNome(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListarProfessoresNome(Professor ListaDeProfessor[], int qtd_prof_cadastrado);
+void ListarProfDataNasc(Professor ListaDeProfessores[], int qtd_prof_cadastrados);
 void ListarAniversariantesDoMes(Professor ListaDeProfessor[], int qtd_prof_cadastrado, Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListaDePessoas(Professor ListaDeProfessor[], int qtd_prof_cadastrado, Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListarAlunoDataNasc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
+void ImprimeDisciplinaExtrapolaAlunos(Disciplina ListaDeDisciplina [], int maximo);

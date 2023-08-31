@@ -7,14 +7,15 @@
 #include <string.h>
 
 int MenudeDisciplina(){
-  int MenuDisciplina;
-  printf("\n  0 > Retornar\n");
-  printf("  1 > Inserir disciplina \n");
-  printf("  2 > Excluir disciplina \n");
-  printf("  3 > Atualizar cadastro da disciplina \n");
-  printf("  4 > Inserir turma\n");
-  MenuDisciplina=VerificacaoValorMenu(0,4);
-  getchar();
+	int MenuDisciplina;
+	printf("\n\n------ MÓDULO DISCIPLINA ------\n");
+	printf("\n  0 > Retornar\n");
+	printf("  1 > Inserir disciplina \n");
+	printf("  2 > Excluir disciplina \n");
+	printf("  3 > Atualizar cadastro da disciplina \n");
+	printf("  4 > Inserir turma\n");
+	MenuDisciplina=VerificacaoValorMenu(0,4);
+
 
   return MenuDisciplina;
 }
@@ -28,98 +29,101 @@ void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, 
 
   ValidarSemestre(ListaDeDisciplina[qtd_disc_cadastrado].Semestre);
 
-  ValidarNomeProf(ListaDeDisciplina[qtd_disc_cadastrado].Professor ,ListaDeProfessor,qtd_prof_cadast);
+  ValidarNomeProf(ListaDeDisciplina[qtd_disc_cadastrado].Professor, ListaDeProfessor, qtd_prof_cadast);
 
   ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos=0;
 }
 
-/*int AtualizarDisciplina(Disciplina ListaDeDisciplina[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado) {
-
-  
-  if(codigo_disciplina_atualizar >=0 && codigo_disciplina_atualizar < qtd_disc_cadastrado){
-    printf("\nInsira o novo nome da disciplina\n");
-    fgets(ListaDeDisciplina[codigo_disciplina_atualizar].Nome, Tam_Nome_Disc, stdin);
-  
-    printf("\nInsira o novo código da disciplina:\n");
-    scanf("%d", &ListaDeDisciplina[codigo_disciplina_atualizar].Codigo);
-    getchar();
-  
-    printf("\nInsira o novo semestre\n");
-    scanf("%d", &ListaDeDisciplina[codigo_disciplina_atualizar].Semestre);
-    getchar();
-  
-    printf("\nInsira o novo nome do professor correspondente à disciplina:\n");
-    fgets(ListaDeDisciplina[codigo_disciplina_atualizar].Professor, Tam_Nome, stdin);
-    return 1;
-  }
-  return 0;
-} */
-
-    
-
-int AtualizarDisciplina(Disciplina ListaDeDisciplina[], Professor ListaDeProfessor[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado, int qtd_prof_cadast) {
+void AtualizarDisciplina(Disciplina ListaDeDisciplina[], Professor ListaDeProfessor[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado, int qtd_prof_cadast) {
     int encontrou = 0;
-    int i, j;
-    int codigo;
-    printf("\n Insira o código da disciplina que deseja atualizar: \n");
-    scanf("%d", &codigo);
-	getchar();
-    for (i=0; i< qtd_disc_cadastrado; i++){
-      if(ListaDeDisciplina[i].Codigo == codigo){
-              printf("\n\nDisciplina encontrada\n\n");              
-        
-              printf("\nInsira o novo nome da disciplina:\n");
-              //fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin);
-              fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin);
-            
-              printf("\nInsira o novo código da disciplina:\n");
-              scanf("%d", &ListaDeDisciplina[i].Codigo);
-              ValidarCodigoDisc(&ListaDeDisciplina[i].Codigo);
-                          
-              printf("\nInsira o novo semestre\n");
-              scanf("%c", ListaDeDisciplina[i].Semestre);
-              ValidarSemestre(ListaDeDisciplina[i].Semestre);
-                          
-              printf("\nInsira a nome do novo professor correspondente à disciplina: \n");
-              fgets(ListaDeDisciplina[i].Professor, Tam_Nome, stdin);
-              ValidarNomeProf(ListaDeDisciplina[i].Professor ,ListaDeProfessor, qtd_prof_cadast);
-              
-              encontrou = 1;
-              break; 
-        }      
-    }
-    if (encontrou){
-            printf("Disciplina atualizada com sucesso\n ");
-            
-    } else {
-      printf("Código de disciplina inválido\n");
-    }
+    int i, j, sair = 0;
+    int codigo, MenuAtualizarDisc;
+
+	while(!sair){	
+		printf("\n Insira o código da disciplina que deseja atualizar: \n");
+		scanf("%d", &codigo);
+		getchar();
+		for (i=0; i< qtd_disc_cadastrado && sair == 0; i++){
+			if(ListaDeDisciplina[i].Codigo == codigo){
+				printf("\nATUALIZAÇÃO DE DADOS: DISCIPLINA\n");
+				printf("\nEscolha o dado que deseja atualizar \n");  
+				printf("0 - Sair\n");
+				printf("1 - Nome\n");
+				printf("2 - Código\n");
+				printf("3 - Semestre\n");
+				printf("4 - Professor\n");
+				
+				MenuAtualizarDisc = VerificacaoValorMenu(0,4);
+
+				switch(MenuAtualizarDisc){
+					case 0:{
+						sair = 1;
+						break;
+					}
+					case 1:{
+						printf("\nInsira o novo nome da disciplina:\n");
+						fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin); 
+						break;
+					}             
+					case 2:{
+						ValidarCodigoDisc(&ListaDeDisciplina[i].Codigo);
+						break;
+					}
+					case 3:{
+						ValidarSemestre(ListaDeDisciplina[i].Semestre);
+						break;
+					}			
+					case 4:{
+						ValidarNomeProf(ListaDeDisciplina[i].Professor, ListaDeProfessor, qtd_prof_cadast);
+						break;
+					}					              					 
+				}
+				encontrou = 1;
+				break;
+			} 
+			
+		}
+		if (encontrou){
+			printf("Disciplina atualizada com sucesso\n ");
+		
+		} else {
+			printf("Código de disciplina inválido\n");
+		}
+  	}
+
 }
   
 
-void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado) {
+void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, Aluno ListaDeAlunos[],int qtd_alunos_cadastrados) {
   int encontrou = 0;
-  int i, j;
+  int icont, jcont, kcont, lcont;
   int codigo;
-  printf("Insira o código da disciplina a ser excluída:\n");
-  scanf("%d", &codigo);
-  for (i=0; i< qtd_disc_cadastrado; i++){
-    if(ListaDeDisciplina[i].Codigo == codigo){
-      for(j=i; j < (QTD_Disc - 1); j++){
-        strcpy(ListaDeDisciplina[j].Nome,ListaDeDisciplina[j+1].Nome);
-        ListaDeDisciplina[j].Codigo = ListaDeDisciplina[j+1].Codigo;
-        strcpy(ListaDeDisciplina[j].Semestre,ListaDeDisciplina[j+1].Semestre);
-        strcpy(ListaDeDisciplina[j].Professor, ListaDeDisciplina[j+1].Professor);      
-        
-      }      
-      encontrou = 1;
-      break; 
+  int sair=1;
+  while(sair!=0){
+    printf("Insira o código da disciplina a ser excluída:\n");
+    codigo= PadraoCodigo();
+    for (icont=0; icont< qtd_disc_cadastrado; icont++){
+      if(ListaDeDisciplina[icont].Codigo == codigo){
+        for(kcont=0;kcont<qtd_alunos_cadastrados;kcont++)
+          for(lcont=icont+1;lcont<qtd_disc_cadastrado;lcont++)
+          	ListaDeAlunos[kcont].Qtd_Mat_Cadast[lcont-1]=ListaDeAlunos[kcont].Qtd_Mat_Cadast[lcont];
+        for(jcont=icont+1; jcont < qtd_disc_cadastrado;jcont++){
+          strcpy(ListaDeDisciplina[jcont-1].Nome,ListaDeDisciplina[jcont].Nome);
+          ListaDeDisciplina[jcont-1].Codigo = ListaDeDisciplina[jcont].Codigo;
+          strcpy(ListaDeDisciplina[jcont-1].Semestre,ListaDeDisciplina[jcont].Semestre);
+          strcpy(ListaDeDisciplina[jcont-1].Professor, ListaDeDisciplina[jcont].Professor);      
+          
+        }      
+        encontrou = 1;
+        break; 
+      }
     }
-  }
-  if (encontrou){
-    printf("Disciplina excluída com sucesso!\n");
-  } else {
-    printf("Código da disciplina inválido!");
+    if (encontrou){
+      printf("Disciplina excluída com sucesso!\n");
+      sair=0;
+    } else {
+      printf("Código da disciplina inválido!");
+    }
   }
 }
 
@@ -136,6 +140,7 @@ void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastr
   int posicao;
   int icont;
   int jcont;
+  int encontrada=0;
   int sairdoloop1=1;
   char matricula[10];
   int codigoDisciplina;
@@ -148,6 +153,7 @@ void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastr
     {
       if (disciplina[jcont].Codigo == codigoDisciplina) 
       {
+        int encontrada=1;
         int numAlunos = disciplina[jcont].NumAlunos;
         printf("\nInserindo alunos na disciplina %s\n", disciplina[jcont].Nome);
         int sairloop2=1;
@@ -161,7 +167,7 @@ void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastr
               if (verificarExistenciaMatricula(alunos, qtd_alunos_cadastrados, matricula)) {
                 posicao = BuscarPosicaoAluno(alunos, matricula, qtd_alunos_cadastrados);
                 alunos[posicao].Qtd_Mat_Cadast[jcont]=1;
-                strcpy(disciplina[jcont].Turma[numAlunos], matricula);
+                //strcpy(disciplina[jcont].Turma[numAlunos], matricula);
                 numAlunos++;
                 disciplina[jcont].NumAlunos = numAlunos;
                 printf("\nInserir novo aluno?\n");
@@ -179,7 +185,7 @@ void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastr
           }else printf("\nMatrícula inválida. Tente novamente.\n");
         } 
       }
-      if (jcont==qtd_disc_cadast-1 && disciplina[jcont].Codigo != codigoDisciplina)
+      if (encontrada==0 && jcont==qtd_disc_cadast-1 && disciplina[jcont].Codigo != codigoDisciplina)
         printf("\nDisciplina não encontrada. Tente novamente\n");
     }
   }
@@ -258,16 +264,16 @@ void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_pro
     printf("\nNão existe professor cadastrado no sistema.\n\n");
     valido=0;
   }
-  
+  //else
   while(valido!=0)
   {
     printf("\nInsira o nome do professor referente a disciplina\n\n");
-    fgets(comparar,Tam_Nome,stdin);
+    fgets(comparar, Tam_Nome, stdin);
     delbar0(comparar);
     Existeprof=0;
     for(icont=0;icont<qtd_prof_cadast;icont++)
     {
-      if(strcmp(comparar,ListaDeProfessor[icont].Nome)==0)
+      if(strcmp(comparar, ListaDeProfessor[icont].Nome)==0)
       {
         Existeprof=1;
         break;
@@ -280,7 +286,34 @@ void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_pro
   }
 }
 
+int PadraoCodigo(){
+  char str[10];
+  int icont;
+  int sair=1;
+  int validacao=0;
+  int codigo;
+  while(sair!=0){
+    fgets(str,10,stdin);
+    delbar0(str);
+    int tam_str=strlen(str);
+    
+    if(tam_str==5){
+      validacao=0;
+      for(icont=0;str[icont]!='\0';icont++)
+        if(str[icont]>='0' && str[icont]<='9'){
+          validacao++;
+      }else validacao--;
+      if(validacao==5){
+        codigo=atoi(str);
+        sair=0;
+      }else printf("Codigo invalido! Tente novamente:");
+    }else printf("Codigo invalido! Tente novamente:");
+  }
+  return codigo;
+}
+
 void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor ListaDeProfessor[],int qtd_prof_cadastrado,Disciplina ListaDeDisciplina[],int qtd_disc_cadastrado){
+  
   strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Matricula, "202301");
   strcpy(ListaDeAlunos[qtd_alunos_cadastrados].Nome, "Maria Santos");
   ListaDeAlunos[qtd_alunos_cadastrados].Sexo = 'F';
@@ -367,14 +400,14 @@ void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor L
   ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[3] = 1;
   qtd_alunos_cadastrados++;
 
-  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202101");
-  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Nome, "Clodovil Oliveira");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202415");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Nome, "Marcos Oliveira");
   ListaDeProfessor[qtd_prof_cadastrado].Sexo = 'M';
-  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Cpf, "349.731.843-00");
-  strcpy(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data, "03/10/1998");
-  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.dia = 03;
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].Cpf, "329.731.843-53");
+  strcpy(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data, "02/10/1999");
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.dia = 02;
   ListaDeProfessor[qtd_prof_cadastrado].DataNasc.mes = 10;
-  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.ano = 1998;
+  ListaDeProfessor[qtd_prof_cadastrado].DataNasc.ano = 1999;
   qtd_prof_cadastrado++;
 
   strcpy(ListaDeProfessor[qtd_prof_cadastrado].Matricula, "202110");
@@ -411,9 +444,7 @@ void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor L
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Professor, "Ana Maria Oliveira");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Nome, "Matematica");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Semestre, "2022.2");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[0], "202301");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[1], "202302");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[2], "202102");
+
   ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos = 5;
   qtd_disc_cadastrado++;
   
@@ -421,10 +452,6 @@ void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor L
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Professor, "Maria Antonieta dos Santos");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Nome, "Portugues");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Semestre, "2023.1");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[0], "202301");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[1], "202201");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[2], "202202");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[3], "202102");
   ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos = 4;
   qtd_disc_cadastrado++;
 
@@ -432,9 +459,7 @@ void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor L
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Professor, "Mario Antonio");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Nome, "Geografia");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Semestre, "2023.1");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[0], "202301");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[1], "202201");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[2], "202102");
+
   ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos = 3;
   qtd_disc_cadastrado++;
 
@@ -442,8 +467,7 @@ void PreencherDados(Aluno ListaDeAlunos[],int qtd_alunos_cadastrados,Professor L
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Professor, "Clodovil Oliveira");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Nome, "Sociologia");
   strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Semestre, "2023.2");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[0], "202301");
-  strcpy(ListaDeDisciplina[qtd_disc_cadastrado].Turma[1], "202101");
+
   ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos = 2;
   qtd_disc_cadastrado++;
 

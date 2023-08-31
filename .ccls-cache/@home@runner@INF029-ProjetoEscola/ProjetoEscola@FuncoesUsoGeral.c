@@ -61,14 +61,14 @@ void ValidarNome(char Lista[]) {
   }
 }
 
-void ValidarSexo(char sexo) {
+void ValidarSexo(char *sexo) {
   int verif = 0;
   // char sexo;
   while (verif != 1) {
     printf("\nInsira o sexo do aluno: M/F\n");
-    scanf("%c", &sexo);
+    scanf("%c", sexo);
     getchar();
-    if ((sexo == 'M') || (sexo == 'm') || (sexo == 'f') || (sexo == 'F')) {
+    if ((*sexo == 'M') || (*sexo == 'm') || (*sexo == 'f') || (*sexo == 'F')) {
       // printf("Sexo cadastrado com sucesso");
       verif = 1;
     } else {
