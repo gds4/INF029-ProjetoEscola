@@ -20,14 +20,16 @@ int MenudeAlunos(){
 
 void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadastrados){
 	int icont;
-	ValidarMatricula(ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
-	ValidarNome(ListaDeAlunos[qtd_alunos_cadastrados].Nome);
-	ValidarSexo(&ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
-	ValidarData(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data,
-				&ListaDeAlunos[qtd_alunos_cadastrados].DataNasc);
-	ValidarCPF(ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
-	for(icont=0;icont<qtd_disc_cadastrados;icont++)
-		ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[icont]=0;
+  if(qtd_alunos_cadastrados<QTD_Alunos){
+  	ValidarMatricula(ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
+  	ValidarNome(ListaDeAlunos[qtd_alunos_cadastrados].Nome);
+  	ValidarSexo(&ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
+  	ValidarData(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data,
+  				&ListaDeAlunos[qtd_alunos_cadastrados].DataNasc);
+  	ValidarCPF(ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
+  	for(icont=0;icont<qtd_disc_cadastrados;icont++)
+  		ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[icont]=0;
+  }else printf("\nNúmero máximo de alunos atingido\nNão é possível cadastrar um novo aluno.\n");
   
 }
 

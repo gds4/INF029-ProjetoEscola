@@ -32,12 +32,13 @@ int main(void) {
   int matriculaprof;
   int icont=0;
   int jcont=0;
+  
   PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados,ListaDeProfessor,qtd_prof_cadastrado,ListaDeDisciplina,qtd_disc_cadastrado);
   qtd_alunos_cadastrados=6;
   qtd_prof_cadastrado=4;
   qtd_disc_cadastrado=4;
 
-  int numero_limite_Alunos = 1;
+  
   printf("----Bem vindo ao Sistema Escolar----\n");
 
 	while (InicioCont != 0) {
@@ -197,9 +198,13 @@ int main(void) {
 								break;
 							}
 							case 14:{
-								ImprimeDisciplinaExtrapolaAlunos(ListaDeDisciplina, numero_limite_Alunos);                
+								ImprimeDisciplinaExtrapolaAlunos(ListaDeDisciplina, Num_Max_Alunos,qtd_disc_cadastrado);                
 								break;
 							}
+              case 15:{
+                ListarDiscDoAluno(ListaDeAlunos, qtd_alunos_cadastrados, ListaDeDisciplina, qtd_disc_cadastrado);
+                break;
+              }
 						}
 						  break;
 					}

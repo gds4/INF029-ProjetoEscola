@@ -290,7 +290,7 @@ void ListarProfessoresNome(Professor ListaDeProfessor[], int qtd_prof_cadastrado
 		strcpy(ListaDeProfNome[icont].Nome, ListaDeProfessor[icont].Nome);
 		strcpy(&ListaDeProfNome[icont].Sexo, &ListaDeProfessor[icont].Sexo);
 		strcpy(ListaDeProfNome[icont].Cpf, ListaDeProfessor[icont].Cpf);
-		strcpy(ListaDeProfNome[icont].DataNasc.str_data, ListaDeProfNome[icont].DataNasc.str_data);
+		strcpy(ListaDeProfNome[icont].DataNasc.str_data, ListaDeProfessor[icont].DataNasc.str_data);
 	}
 	
 	for(icont = 0; icont < qtd_prof_cadastrado - 1;icont++){
@@ -423,6 +423,7 @@ void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastra
   int jcont;
   int somat=0;
   int alunosprintados=0;
+	printf("\nALUNOS MATRICULADOS EM MENOS DE 3 DISCIPLINAS\n");
   for (icont = 0; icont < qtd_alunos_cadastrados; icont++){
     somat=0;
     for(jcont=0;jcont<qtd_disc_cadast;jcont++){  
@@ -542,18 +543,69 @@ void ListarProfDataNasc(Professor ListaDeProfessores[], int qtd_prof_cadastrados
 }
 
 
-void ImprimeDisciplinaExtrapolaAlunos(Disciplina ListaDeDisciplina[], int maximo){
-    int i;
+void ImprimeDisciplinaExtrapolaAlunos(Disciplina ListaDeDisciplina[], int maximo,int qtd_disc_cadastrado){
+    int icont;
     int extrapola = 0;
-    for (i = 0; i < Max_Aluno_Turma; i++){
-        if(ListaDeDisciplina[i].NumAlunos > maximo){          
-          printf("%s\n", ListaDeDisciplina[i].Nome);
-          printf("%d\n", ListaDeDisciplina[i].NumAlunos);            
-          extrapola++;          
-        }else {
-        printf("Nenhuma disciplina extrapolou o número de alunos");   
-        }
-    }  
     
+    for (icont = 0; icont < qtd_disc_cadastrado; icont++){
+        
+      if(ListaDeDisciplina[icont].NumAlunos > maximo){  
+        
+        if(extrapola==0){
+        printf("\n%-7s  %-20s %-7s %-30s\n", "Código", "Nome", "Semestre", "Professor");
+        printf("------- -------------------- ------- ------------------------------\n");
+      }
+        printf("%-7d %-20s %-7s %-30s\n",ListaDeDisciplina[icont].Codigo,
+                                         ListaDeDisciplina[icont].Nome,
+                                         ListaDeDisciplina[icont].Semestre,
+                                         ListaDeDisciplina[icont].Professor);          
+        extrapola++;          
+      }   
+      
+    }  
+    if(extrapola==0){
+        printf("\nNenhuma disciplina extrapolou o número de alunos\n");
+    }
 }
+
+void ListarDiscDoAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
+  char matricula[10];
+  int posicao, sair = 1;
+  int icont;
+  int discencontrada=0;
+  while(sair!=0){
+    printf("\nInsira a Matrícula do Aluno:\n");
+    fgets(matricula,10,stdin);
+    delbar0(matricula);
+
+    if(verificarExistenciaMatricula ( ListaDeAlunos,  qtd_alunos_cadastrados, matricula)==1){
+      posicao = BuscarPosicaoAluno(ListaDeAlunos,matricula,qtd_alunos_cadastrados);
+      for(icont=0;icont<qtd_disc_cadastrado;icont++){
+        if(ListaDeAlunos[posicao].Qtd_Mat_Cadast[icont]==1){
+          if(discencontrada==0){
+            printf("\nDisciplina(s) do Aluno: %s\n",ListaDeAlunos[posicao].Nome);
+             printf("\n%-7s  %-20s %-7s %-30s\n", "Código", "Nome", "Semestre", "Professor");
+        printf("------- -------------------- ------- ------------------------------\n");
+            }
+              
+            printf("%-7d %-20s %-7s %-30s\n",ListaDeDisciplina[icont].Codigo,
+                                         ListaDeDisciplina[icont].Nome,
+                                         ListaDeDisciplina[icont].Semestre,
+                                         ListaDeDisciplina[icont].Professor);
+            discencontrada++;
+          
+        }
+      }
+      sair=0;
+    }else printf("\nMatricula inválida! Tente Novamente:\n");
+
+    if(discencontrada==0){
+      printf("\nO Aluno não está cadastrado em nenhuma disciplina.\n");
+      sair=0;
+    }
+      
+  }
+  
+}
+
 

@@ -8,7 +8,8 @@
 #define Tam_Cpf 16
 #define Tam_Codigo 6
 #define QTD_Alunos 10
-#define QTD_Disc_Max 10 
+#define QTD_Disc_Max 10
+#define Num_Max_Alunos 3
 //QTD_Disc_Max deve ser igual a QTD_Disc
 #include "Data.h"
 

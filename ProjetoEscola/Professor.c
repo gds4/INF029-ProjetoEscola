@@ -18,12 +18,14 @@ int MenudeProfessores() {
 }
 
 void InserirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
-  ValidarMatricula(ListaDeProfessor[qtd_prof_cadastrado].Matricula);
-  ValidarNome(ListaDeProfessor[qtd_prof_cadastrado].Nome);
-  ValidarSexo(&ListaDeProfessor[qtd_prof_cadastrado].Sexo);
-  ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,
-	  &ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
-  ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
+  if(qtd_prof_cadastrado<QTD_Professor){
+    ValidarMatricula(ListaDeProfessor[qtd_prof_cadastrado].Matricula);
+    ValidarNome(ListaDeProfessor[qtd_prof_cadastrado].Nome);
+    ValidarSexo(&ListaDeProfessor[qtd_prof_cadastrado].Sexo);
+    ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,
+  	  &ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
+    ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
+  }else printf("\nNúmero máximo de professores atingido\nNão é possível cadastrar um novo professor.\n");
 }
 
 void ExcluirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {

@@ -23,4 +23,5 @@ void ListarAniversariantesDoMes(Professor ListaDeProfessor[], int qtd_prof_cadas
 void ListaDePessoas(Professor ListaDeProfessor[], int qtd_prof_cadastrado, Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast);
 void ListarAlunoDataNasc(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
-void ImprimeDisciplinaExtrapolaAlunos(Disciplina ListaDeDisciplina [], int maximo);
+void ImprimeDisciplinaExtrapolaAlunos(Disciplina ListaDeDisciplina [], int maximo,int qtd_disc_cadastrado);
+void ListarDiscDoAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado);

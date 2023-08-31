@@ -21,17 +21,18 @@ int MenudeDisciplina(){
 }
 
 void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, Professor ListaDeProfessor[], int qtd_prof_cadast){
-
-  printf("\nInsira o nome da disciplina:\n");
-  fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
-
-  ValidarCodigoDisc(&ListaDeDisciplina[qtd_disc_cadastrado].Codigo);
-
-  ValidarSemestre(ListaDeDisciplina[qtd_disc_cadastrado].Semestre);
-
-  ValidarNomeProf(ListaDeDisciplina[qtd_disc_cadastrado].Professor, ListaDeProfessor, qtd_prof_cadast);
-
-  ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos=0;
+  if(qtd_disc_cadastrado<QTD_Disc){
+    printf("\nInsira o nome da disciplina:\n");
+    fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
+  
+    ValidarCodigoDisc(&ListaDeDisciplina[qtd_disc_cadastrado].Codigo);
+  
+    ValidarSemestre(ListaDeDisciplina[qtd_disc_cadastrado].Semestre);
+  
+    ValidarNomeProf(ListaDeDisciplina[qtd_disc_cadastrado].Professor, ListaDeProfessor, qtd_prof_cadast);
+  
+    ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos=0;
+  }else printf("\nNúmero máximo de disciplinas atingido\nNão é possível cadastrar uma nova disciplina.\n");
 }
 
 void AtualizarDisciplina(Disciplina ListaDeDisciplina[], Professor ListaDeProfessor[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado, int qtd_prof_cadast) {
