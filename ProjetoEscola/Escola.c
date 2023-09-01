@@ -33,11 +33,11 @@ int main(void) {
   int icont=0;
   int jcont=0;
   
-  /*A função PreencherDados insere alguns dados no sistema, para testes, caso queira utilizar bastas descomentar logo abaixo:  
+  /*A função PreencherDados insere alguns dados no sistema para testes, caso queira utilizar basta descomentar logo abaixo: */
   PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados,ListaDeProfessor,qtd_prof_cadastrado,ListaDeDisciplina,qtd_disc_cadastrado);
   qtd_alunos_cadastrados=6;
   qtd_prof_cadastrado=4;
-  qtd_disc_cadastrado=4;*/
+  qtd_disc_cadastrado=4; 
 
   
   printf("----Bem vindo ao Sistema Escolar----\n");
