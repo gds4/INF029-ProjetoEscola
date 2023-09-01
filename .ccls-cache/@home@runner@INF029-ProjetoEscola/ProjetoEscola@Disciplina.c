@@ -384,6 +384,4 @@ void PreencherDados(Aluno *ListaDeAlunos,int qtd_alunos_cadastrados,Professor Li
   ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos = 2;
   qtd_disc_cadastrado++;
 
-
-
 }

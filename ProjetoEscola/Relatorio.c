@@ -524,33 +524,6 @@ void ListarAlunosMatriculadosDisc(Aluno ListaDeAlunos[], int qtd_alunos_cadastra
   }else printf("\nNão há alunos matriculados no sistema.\n");
 }
 
-void ListarDiscDeAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado){
-  char aluno[Tam_Nome];
-  char comparar;
-  int icont;
-  int sairloop=1;
-  int posicao;
-  if(qtd_alunos_cadastrados>0){
-    while(sairloop!=0){
-      printf("Digite o nome do estudante:\n");
-      fgets(aluno, sizeof(Tam_Nome), stdin);
-      delbar0(aluno);
-      posicao=BuscarPosicaoAluno(ListaDeAlunos, aluno, qtd_alunos_cadastrados);
-      if(posicao>=0){
-        for (icont = 0; icont < qtd_disc_cadastrado; icont++){
-         	if(ListaDeAlunos[posicao].Qtd_Mat_Cadast[icont]==1){
-            printf("---------------------------------");
-            printf("\n%s", ListaDeAlunos[posicao].Nome);
-            printf("\n%s\n", ListaDeDisciplina[icont].Nome);
-            printf("---------------------------------");
-        sairloop=1;
-        }
-        }
-      }else printf("\nMatrícula Inválida. Tente Novamente.\n");
-    }
-  }else printf("\nNão há alunos cadastrados no sistema.\n");
-}
-
 
 int CompareAlunosPorDataNasc(const void *a, const void *b) {
     const Aluno *alunoA = (const Aluno *)a;
@@ -692,5 +665,3 @@ void ListarDiscDoAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, Discip
     }
   }else printf("\nNão há alunos cadastrados no sistema.\n");
 }
-
-

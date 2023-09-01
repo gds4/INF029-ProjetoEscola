@@ -178,15 +178,3 @@ int BuscarPosicaoProfessor(Professor ListaDeProfessores[], char matricula[],int 
       posicao = icont;
   return posicao;
 }
-
-/*
-void ImprimeProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado, char Matricula){
-  int matricula;
-	int j;
-  for(j = 0; j <  qtd_prof_cadastrado; j++){
-        if (ListaDeProfessor[j].Matricula == matricula){
-            printf("%s\n", ListaDeProfessor[j].Nome);
-            break;
-        }    
-    }
-}*/

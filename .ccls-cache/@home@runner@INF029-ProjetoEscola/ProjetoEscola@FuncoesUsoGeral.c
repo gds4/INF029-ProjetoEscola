@@ -270,7 +270,7 @@ void ValidarSemestre(char input[]){
   int valido=1;
   int somat;
   while (valido!=0){
-    printf("\nInforme o semestre da disciplina:\n\n");
+    printf("\nInforme o semestre da disciplina no formato Ano.Semestre:\n\n");
     fgets(validacao,10,stdin);
     delbar0(validacao);
     if(strlen(validacao)==6)
