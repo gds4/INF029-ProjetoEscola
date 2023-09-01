@@ -29,6 +29,7 @@ void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,int qtd_disc
   	ValidarCPF(ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
   	for(icont=0;icont<qtd_disc_cadastrados;icont++)
   		ListaDeAlunos[qtd_alunos_cadastrados].Qtd_Mat_Cadast[icont]=0;
+    printf("\nAluno inserido com sucesso!\n");
   }else printf("\nNúmero máximo de alunos atingido\nNão é possível cadastrar um novo aluno.\n");
   
 }
@@ -86,62 +87,69 @@ void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados){
 	int mat_valida;
 	char matricula[Tam_Matricula];
 	int MenuAtualizar;
-
-	while(!sair){
-		printf("Insira a matrícula do aluno: ");
-		fgets(matricula,Tam_Matricula,stdin);
-		delbar0(matricula);
-		
-		mat_valida=BuscarPosicaoAluno(ListaDeAlunos, matricula,qtd_alunos_cadastrados);
-		
-		if(mat_valida>=0){
-			for(icont=0;icont<qtd_alunos_cadastrados+1 && sair == 0;icont++){
-				for(jcont=0;jcont<Tam_Matricula && sair == 0;jcont++){
-					if(ListaDeAlunos[icont].Matricula[jcont]==matricula[jcont]){
-						printf("\nATUALIZAÇÃO DE DADOS: ALUNO\n\n");
-						printf("\nInforme o dado que deseja atualizar\n");
-						printf("0 - Retornar\n");
-						printf("1 - Matrícula\n");
-						printf("2 - Nome\n");
-						printf("3 - CPF\n");
-						printf("4 - Data de nascimento\n");
-						printf("5 - Sexo\n");
-						MenuAtualizar=VerificacaoValorMenu(0,5);
-						
-						switch(MenuAtualizar){
-							case 0:{
-							  	sair = 1;
-							  	break;
-							}
-							case 1:{			  
-							  	ValidarMatricula(ListaDeAlunos[qtd_alunos_cadastrados].Matricula);
-								break;
-							}
-							
-							case 2:{
-							  	ValidarNome(ListaDeAlunos[qtd_alunos_cadastrados].Nome);
-								break;
-							}
-							case 3:{
-							  	ValidarCPF(ListaDeAlunos[qtd_alunos_cadastrados].Cpf);
-								break;
-							}
-							
-							case 4:{
-							  	ValidarData(ListaDeAlunos[qtd_alunos_cadastrados].DataNasc.str_data,
-											&ListaDeAlunos[qtd_alunos_cadastrados].DataNasc);
-								break;
-							}
-							case 5:{
-								  ValidarSexo(&ListaDeAlunos[qtd_alunos_cadastrados].Sexo);
-								  break;
-							}
-						}
-					}
-				}
-			}
-		}else printf("Matrícula não Encontrada! Tente Novamente.");
-	}	
+  if(qtd_alunos_cadastrados>0){
+  	while(!sair){
+  		printf("\nInsira a matrícula do aluno: \n");
+  		fgets(matricula,Tam_Matricula,stdin);
+  		delbar0(matricula);
+  		
+  		mat_valida=BuscarPosicaoAluno(ListaDeAlunos, matricula,qtd_alunos_cadastrados);
+  		
+  		if(mat_valida>=0){
+        
+              getchar();
+  						printf("\nATUALIZAÇÃO DE DADOS: ALUNO\n\n");
+  						printf("\nInforme o dado que deseja atualizar\n");
+  						printf("0 - Retornar\n");
+  						printf("1 - Matrícula\n");
+  						printf("2 - Nome\n");
+  						printf("3 - CPF\n");
+  						printf("4 - Data de nascimento\n");
+  						printf("5 - Sexo\n");
+  						MenuAtualizar=VerificacaoValorMenu(0,5);
+  						
+  						switch(MenuAtualizar){
+  							case 0:{
+  							  sair = 1;
+  							  break;
+  							}
+  							case 1:{			  
+  							  ValidarMatricula(ListaDeAlunos[mat_valida].Matricula);
+                  printf("\nMatrícula stualizada com sucesso!\n");
+                  sair = 1;
+  								break;
+  							}
+  							
+  							case 2:{
+  							  ValidarNome(ListaDeAlunos[mat_valida].Nome);
+                  printf("\nNome atualizado com sucesso!\n");
+                  sair = 1;
+  								break;
+  							}
+  							case 3:{
+  							  ValidarCPF(ListaDeAlunos[mat_valida].Cpf);
+                  printf("\nCPF atualizado com sucesso!\n");
+                  sair = 1;
+  								break;
+  							}
+  							
+  							case 4:{
+  							  ValidarData(ListaDeAlunos[mat_valida].DataNasc.str_data,
+  											&ListaDeAlunos[mat_valida].DataNasc);
+                  printf("\nData de nascimento atualizada com Sucesso!\n");
+                  sair = 1;
+  								break;
+  							}
+  							case 5:{
+  								ValidarSexo(&ListaDeAlunos[mat_valida].Sexo);
+                  printf("\nSexo Atualizado com Sucesso!\n");
+                  sair = 1;
+  								break;
+  							}
+  						}
+  		}else printf("\nMatrícula não Encontrada! Tente Novamente.\n");
+  	}
+  }else printf("\nNão há alunos cadastrados no sistema.\n");
 }
 
 int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrados){
@@ -151,4 +159,14 @@ int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrad
     if(strcmp(matricula, alunos[icont].Matricula)==0)
       posicao = icont;
   return posicao;
+}
+
+int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula) {
+    int icont;
+    for (icont = 0; icont < qtd_alunos_cadastrados; icont++) {
+        if (strcmp(alunos[icont].Matricula, matricula) == 0) {
+            return 1;
+        }
+    }
+    return 0;
 }

@@ -3,6 +3,7 @@
 
 #include "Data.h"
 
+
 #define Tam_Matricula 7
 #define Tam_Nome 101
 #define Tam_Data 12
@@ -23,6 +24,8 @@ int MenuRelatorios();
 void InserirProfessor(Professor ListaDeProfessor[],int qtd_prof_cadastrado);
 void ExcluirProfessor(Professor ListaDeProfessor[],int qtd_prof_cadastrado);
 void AtualizarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado);
+void ValidarNomeProf (char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast);
+int BuscarPosicaoProfessor(Professor ListaDeProfessores[], char matricula[],int qtd_prof_cadastrados);
 
 
 #endif

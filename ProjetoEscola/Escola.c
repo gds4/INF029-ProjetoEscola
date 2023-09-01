@@ -33,10 +33,10 @@ int main(void) {
   int icont=0;
   int jcont=0;
   
-  PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados,ListaDeProfessor,qtd_prof_cadastrado,ListaDeDisciplina,qtd_disc_cadastrado);
+  /*PreencherDados(ListaDeAlunos,qtd_alunos_cadastrados,ListaDeProfessor,qtd_prof_cadastrado,ListaDeDisciplina,qtd_disc_cadastrado);
   qtd_alunos_cadastrados=6;
   qtd_prof_cadastrado=4;
-  qtd_disc_cadastrado=4;
+  qtd_disc_cadastrado=4;*/
 
   
   printf("----Bem vindo ao Sistema Escolar----\n");
@@ -46,167 +46,181 @@ int main(void) {
 	     
 	    if (TeladeInicio == 1) {
 			InicioCont = 1;
-			MenuInicial= 8;
+			MenuInicial= -1;
 			while(MenuInicial!=0){
 				MenuInicial = MenuPrincipal();
 		          
-		        switch (MenuInicial) {
+		    switch (MenuInicial) {
 					case 0:{
 						MenuInicial=0;
 						break;
 					}
 					case 1:{
 						//MÓDULO ALUNO
-						MenuAluno = MenudeAlunos();
-					
-			            switch (MenuAluno) 
-                  {
-							case 0:{
-								break;
-							}		              
-							case 1:{
-								InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados,qtd_disc_cadastrado);
-								qtd_alunos_cadastrados++;
-								break;
-							}
-							case 2:{
-								ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado, ListaDeDisciplina);
-								qtd_alunos_cadastrados--;
-								break;
-							}
-							case 3:{
-								AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
-								break;
-							}  
-			            }	                
-		            	break;
+            MenuAluno=-1;
+            while(MenuAluno!=0){
+  						MenuAluno = MenudeAlunos();
+  					
+              switch (MenuAluno) 
+              {
+                case 0:{
+                  MenuAluno=0;
+                  break;
+                }		              
+                case 1:{
+                  InserirAluno(ListaDeAlunos, qtd_alunos_cadastrados,qtd_disc_cadastrado);
+                  qtd_alunos_cadastrados++;
+                  break;
+                }
+                case 2:{
+                  ExcluirAluno(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado, ListaDeDisciplina);
+                  qtd_alunos_cadastrados--;
+                  break;
+                }
+                case 3:{
+                  AtualizarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
+                  break;
+                }  
+              }
+            } 
+            break;
 					}	          
 					case 2:{
 						//MÓDULO PROFESSOR
-						MenuProfessor = MenudeProfessores();
-						switch (MenuProfessor){
-							case 0:{
-								break;
-							}
-							case 1:{
-								InserirProfessor( ListaDeProfessor, qtd_prof_cadastrado);
-								qtd_prof_cadastrado++;
-								break;
-							}
-							case 2:{
-								ExcluirProfessor(ListaDeProfessor, qtd_prof_cadastrado);
-								qtd_prof_cadastrado--;
-								break;
-							}
-							case 3:{
-								AtualizarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
-								break;
-							}
-						
-						}
+            MenuProfessor=-1;
+            while(MenuProfessor!=0){
+  						MenuProfessor = MenudeProfessores();
+  						switch (MenuProfessor){
+  							case 0:{
+                  MenuProfessor=0;
+  								break;
+  							}
+  							case 1:{
+  								InserirProfessor( ListaDeProfessor, qtd_prof_cadastrado);
+  								qtd_prof_cadastrado++;
+  								break;
+  							}
+  							case 2:{
+  								ExcluirProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+  								qtd_prof_cadastrado--;
+  								break;
+  							}
+  							case 3:{
+  								AtualizarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+  								break;
+  							}
+  						
+  						}
+            }
 						break;
 					}
 		            
 					case 3:{
 						//MÓDULO DISCIPLINA		
-						MenuDisciplina = MenudeDisciplina();
-						switch (MenuDisciplina){ 
-							case 0:{
-								break;
-							}
-							case 1:{           
-								InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeProfessor, qtd_prof_cadastrado);
-								qtd_disc_cadastrado++;
-                
-								break;
-							}
-							case 2:{            
-								ExcluirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
-								qtd_disc_cadastrado--;
-								break;
-							}
-							case 3:{
-								AtualizarDisciplina(ListaDeDisciplina, ListaDeProfessor, codigo_disciplina_atualizar, qtd_disc_cadastrado, qtd_prof_cadastrado);							
-								break;
-							}
-							case 4:{
-								InserirTurma(ListaDeDisciplina, ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
-                printf("%d",ListaDeAlunos[0].Qtd_Mat_Cadast[0]);
-								break;
-							}
-						} 
+            MenuDisciplina=-1;
+            while(MenuDisciplina!=0){
+  						MenuDisciplina = MenudeDisciplina();
+  						switch (MenuDisciplina){ 
+  							case 0:{
+  								break;
+  							}
+  							case 1:{           
+  								InserirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeProfessor, qtd_prof_cadastrado);
+  								qtd_disc_cadastrado++;
+                  
+  								break;
+  							}
+  							case 2:{            
+  								ExcluirDisciplina(ListaDeDisciplina, qtd_disc_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
+  								qtd_disc_cadastrado--;
+  								break;
+  							}
+  							case 3:{
+  								AtualizarDisciplina(ListaDeDisciplina, ListaDeProfessor, codigo_disciplina_atualizar, qtd_disc_cadastrado, qtd_prof_cadastrado);							
+  								break;
+  							}
+  							case 4:{
+  								InserirTurma(ListaDeDisciplina, ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
+                  printf("%d",ListaDeAlunos[0].Qtd_Mat_Cadast[0]);
+  								break;
+  							}
+  						}
+            }
 						break;
 					}  
 		          
 					case 4:{
 						//RELATÓRIOS
-						MenuRelatorio = MenuRelatorios();
-						switch (MenuRelatorio){
-							case 0:{
-								break;
-							}
-							case 1:{
-								ListarAlunos(ListaDeAlunos, qtd_alunos_cadastrados);
-								break;
-							}
-							case 2:{
-								ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
-								break;
-							}              
-							case 3:{
-								ListarDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
-								break;
-              }  
-							case 4:{
-								ListarUmaDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeAlunos,qtd_alunos_cadastrados);
-								break;
-							}
-							case 5:{
-								ListarAlunoSexo(ListaDeAlunos, qtd_alunos_cadastrados);	
-                				break;
-							}							
-							case 6: {
-								ListarAlunosNome(ListaDeAlunos, qtd_alunos_cadastrados);
-								break;
-							}
-							case 7: {
-								ListarAlunoDataNasc(ListaDeAlunos, qtd_alunos_cadastrados);
-								break;
-							}
-							case 8:{
-								ListarProfessorSexo(ListaDeProfessor, qtd_prof_cadastrado);
-								break;
-							}
-							case 9:{
-								ListarProfessoresNome(ListaDeProfessor, qtd_prof_cadastrado);
-								break;
-							}
-							case 10:{
-								ListarProfDataNasc(ListaDeProfessor, qtd_prof_cadastrado);
-                break;
-							}
-							case 11:{
-								ListarAniversariantesDoMes(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);              
-								break;
-							}
-							case 12:{
-								ListaDePessoas(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
-								break;
-						  	}
-							case 13:{
-								ListarAlunosMatriculadosDisc(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
-								break;
-							}
-							case 14:{
-								ImprimeDisciplinaExtrapolaAlunos(ListaDeDisciplina, Num_Max_Alunos,qtd_disc_cadastrado);                
-								break;
-							}
-              case 15:{
-                ListarDiscDoAluno(ListaDeAlunos, qtd_alunos_cadastrados, ListaDeDisciplina, qtd_disc_cadastrado);
-                break;
-              }
-						}
-						  break;
+            MenuRelatorio=-1;
+            while(MenuRelatorio!=0){
+  						MenuRelatorio = MenuRelatorios();
+  						switch (MenuRelatorio){
+  							case 0:{
+  								break;
+  							}
+  							case 1:{
+  								ListarAlunos(ListaDeAlunos, qtd_alunos_cadastrados);
+  								break;
+  							}
+  							case 2:{
+  								ListarProfessor(ListaDeProfessor, qtd_prof_cadastrado);
+  								break;
+  							}              
+  							case 3:{
+  								ListarDisciplina(ListaDeDisciplina, qtd_disc_cadastrado);
+  								break;
+                }  
+  							case 4:{
+  								ListarUmaDisciplina(ListaDeDisciplina, qtd_disc_cadastrado,ListaDeAlunos,qtd_alunos_cadastrados);
+  								break;
+  							}
+  							case 5:{
+  								ListarAlunoSexo(ListaDeAlunos, qtd_alunos_cadastrados);	
+                  				break;
+  							}							
+  							case 6: {
+  								ListarAlunosNome(ListaDeAlunos, qtd_alunos_cadastrados);
+  								break;
+  							}
+  							case 7: {
+  								ListarAlunoDataNasc(ListaDeAlunos, qtd_alunos_cadastrados);
+  								break;
+  							}
+  							case 8:{
+  								ListarProfessorSexo(ListaDeProfessor, qtd_prof_cadastrado);
+  								break;
+  							}
+  							case 9:{
+  								ListarProfessoresNome(ListaDeProfessor, qtd_prof_cadastrado);
+  								break;
+  							}
+  							case 10:{
+  								ListarProfDataNasc(ListaDeProfessor, qtd_prof_cadastrado);
+                  break;
+  							}
+  							case 11:{
+  								ListarAniversariantesDoMes(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);              
+  								break;
+  							}
+  							case 12:{
+  								ListaDePessoas(ListaDeProfessor, qtd_prof_cadastrado, ListaDeAlunos, qtd_alunos_cadastrados);
+  								break;
+  						  	}
+  							case 13:{
+  								ListarAlunosMatriculadosDisc(ListaDeAlunos, qtd_alunos_cadastrados, qtd_disc_cadastrado);
+  								break;
+  							}
+  							case 14:{
+  								ImprimeDisciplinaExtrapolaAlunos(ListaDeDisciplina, Num_Max_Alunos,qtd_disc_cadastrado);                
+  								break;
+  							}
+                case 15:{
+                  ListarDiscDoAluno(ListaDeAlunos, qtd_alunos_cadastrados, ListaDeDisciplina, qtd_disc_cadastrado);
+                  break;
+                }
+  						}
+            }
+					break;
 					}
 				}
 	    }
@@ -232,7 +246,7 @@ int TelaInicial(){
 
 int MenuPrincipal(){
   int MenuInicial;
-  
+  printf("\n------MENU PRINCIPAL------\n");
   printf("\nSelecione a opção desejada:\n");
   printf("\n* Para selecionar, pressione o valor correspondente a opção:\n\n");
   printf("0 - Retornar\n");

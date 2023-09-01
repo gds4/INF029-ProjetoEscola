@@ -15,3 +15,7 @@ void ValidarMatricula(char Matricula[]);
 int PadraoData(char str[]);
 void ValidarData(char Lista[],Data *Referido);
 void ValidarCPF(char Lista[]);
+void ValidarCodigoDisc (int *codigo);
+void ValidarSemestre (char input[]);
+
+

@@ -9,7 +9,7 @@
 #define Tam_Codigo 6
 #define QTD_Alunos 10
 #define QTD_Disc_Max 10
-#define Num_Max_Alunos 3
+#define Num_Max_Alunos 40
 //QTD_Disc_Max deve ser igual a QTD_Disc
 #include "Data.h"
 
@@ -25,11 +25,11 @@ typedef struct Aluno{
 #include "Disciplina.h"
 
 int MenudeAlunos();
-void InserirAluno(Aluno array[], int num, int qtd_disc_cadastrados);
+void InserirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados, int qtd_disc_cadastrados);
 void ExcluirAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados,
 int qtd_disc_cadastrado, Disciplina ListaDeDisciplina[]); 
 void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrados);
-int verificarExistsenciaMatricula (Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula);
+int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula);
 
 #endif

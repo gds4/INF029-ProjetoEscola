@@ -1,6 +1,6 @@
 #include "Professor.h"
-#include "Disciplina.h"
 #include "Aluno.h"
+#include "Disciplina.h"
 #include "FuncoesUsoGeral.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,68 +32,75 @@ void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, 
     ValidarNomeProf(ListaDeDisciplina[qtd_disc_cadastrado].Professor, ListaDeProfessor, qtd_prof_cadast);
   
     ListaDeDisciplina[qtd_disc_cadastrado].NumAlunos=0;
+
+    printf("\nDisciplina inserida com sucesso!\n");
   }else printf("\nNúmero máximo de disciplinas atingido\nNão é possível cadastrar uma nova disciplina.\n");
 }
 
 void AtualizarDisciplina(Disciplina ListaDeDisciplina[], Professor ListaDeProfessor[], int codigo_disciplina_atualizar, int qtd_disc_cadastrado, int qtd_prof_cadast) {
     int encontrou = 0;
-    int i, j, sair = 0;
+    int i, j  = 0;
     int codigo, MenuAtualizarDisc;
-
-	while(!sair){	
-		printf("\n Insira o código da disciplina que deseja atualizar: \n");
-		scanf("%d", &codigo);
-		getchar();
-		for (i=0; i< qtd_disc_cadastrado && sair == 0; i++){
-			if(ListaDeDisciplina[i].Codigo == codigo){
-				printf("\nATUALIZAÇÃO DE DADOS: DISCIPLINA\n");
-				printf("\nEscolha o dado que deseja atualizar \n");  
-				printf("0 - Sair\n");
-				printf("1 - Nome\n");
-				printf("2 - Código\n");
-				printf("3 - Semestre\n");
-				printf("4 - Professor\n");
-				
-				MenuAtualizarDisc = VerificacaoValorMenu(0,4);
-
-				switch(MenuAtualizarDisc){
-					case 0:{
-						sair = 1;
-						break;
-					}
-					case 1:{
-						printf("\nInsira o novo nome da disciplina:\n");
-						fgets(ListaDeDisciplina[i].Nome, Tam_Nome_Disc, stdin); 
-						break;
-					}             
-					case 2:{
-						ValidarCodigoDisc(&ListaDeDisciplina[i].Codigo);
-						break;
-					}
-					case 3:{
-						ValidarSemestre(ListaDeDisciplina[i].Semestre);
-						break;
-					}			
-					case 4:{
-						ValidarNomeProf(ListaDeDisciplina[i].Professor, ListaDeProfessor, qtd_prof_cadast);
-						break;
-					}					              					 
-				}
-				encontrou = 1;
-				break;
-			} 
-			
-		}
-		if (encontrou){
-			printf("Disciplina atualizada com sucesso\n ");
-		
-		} else {
-			printf("Código de disciplina inválido\n");
-		}
-  	}
-
+    int sair=1;
+    int disc_valida;
+  if(qtd_disc_cadastrado>0){
+  	while(sair!=0){	
+      
+  		printf("\n Insira o código da disciplina que deseja atualizar: \n");
+  		codigo = PadraoCodigo();
+      
+  		disc_valida=BuscarPosicaoDisciplina(ListaDeDisciplina,codigo, qtd_disc_cadastrado);
+  		if(disc_valida>=0){
+          
+  				printf("\nATUALIZAÇÃO DE DADOS: DISCIPLINA\n");
+  				printf("\nEscolha o dado que deseja atualizar \n");  
+  				printf("0 - Sair\n");
+  				printf("1 - Nome\n");
+  				printf("2 - Código\n");
+  				printf("3 - Semestre\n");
+  				printf("4 - Professor\n");
+  				
+  				MenuAtualizarDisc = VerificacaoValorMenu(0,4);
+  
+  				switch(MenuAtualizarDisc){
+  					case 0:{
+  						return;
+  					}
+  					case 1:{
+  						printf("\nInsira o novo nome da disciplina:\n");
+  						fgets(ListaDeDisciplina[disc_valida].Nome, Tam_Nome_Disc, stdin); 
+              delbar0(ListaDeDisciplina[disc_valida].Nome);
+              printf("\nNome atualizado com sucesso!\n");
+              sair=0;
+  						break;
+  					}             
+  					case 2:{
+  						ValidarCodigoDisc(&ListaDeDisciplina[disc_valida].Codigo);
+              printf("\nCódigo atualizado com sucesso!\n");
+              sair=0;
+  						break;
+  					}
+  					case 3:{
+  						ValidarSemestre(ListaDeDisciplina[disc_valida].Semestre);
+              printf("\nSemestre atualizado com sucesso!\n");
+              sair=0;
+  						break;
+  					}			
+  					case 4:{
+  						ValidarNomeProf(ListaDeDisciplina[disc_valida].Professor, ListaDeProfessor, qtd_prof_cadast);
+              printf("\nProfessor atualizado com sucesso!\n");
+              sair=0;
+  						break;
+  					}					              					 
+  				}
+  		}
+    }
+  }else printf("\nNão há disciplinas cadastradas no sistema;\n");
 }
   
+
+
+
 
 void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, Aluno ListaDeAlunos[],int qtd_alunos_cadastrados) {
   int encontrou = 0;
@@ -128,15 +135,6 @@ void ExcluirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, 
   }
 }
 
-int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula) {
-    int icont;
-    for (icont = 0; icont < qtd_alunos_cadastrados; icont++) {
-        if (strcmp(alunos[icont].Matricula, matricula) == 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
 void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastrados,int qtd_disc_cadast) {
   int posicao;
   int icont;
@@ -192,101 +190,6 @@ void InserirTurma(Disciplina *disciplina, Aluno alunos[], int qtd_alunos_cadastr
   }
 }
 
-void ValidarCodigoDisc(int *codigo){
-  int icont;
-  int valido=1;
-  char input[10];
-  int somat=0;
-  while(valido!=0){
-    somat=0;
-    printf("\nInsira o código da disciplina\n");
-    fgets(input,10,stdin);
-    delbar0(input);
-    int tam_input=strlen(input);
-    if(tam_input==5){
-      for(icont=0;input[icont]!='\0';icont++){
-        if(input[icont]>='0' && input[icont]<='9'){
-          somat++;
-        }
-      }
-      if(somat==5){
-        *codigo=atoi(input);
-        valido=0;
-      }else printf("\nCódigo inválido! Tente novamente.\n");
-    }else printf("\nO código deve conter 5 digitos. Tente novamente.\n");
-  }
-}
-
-void ValidarSemestre(char input[]){
-  char validacao[10];
-  int icont;
-  int valido=1;
-  int somat;
-  while (valido!=0){
-    printf("\nInforme o semestre da disciplina:\n\n");
-    fgets(validacao,10,stdin);
-    delbar0(validacao);
-    if(strlen(validacao)==6)
-    {
-      if(validacao[5]=='1' || validacao[5]=='2')
-      {
-        if(validacao[4]=='.')
-        {
-          somat=0;
-          for(icont=0;validacao[icont]!='\0';icont++)
-            if(validacao[icont]>='0' && validacao[icont]<='9')
-            {
-              somat++;
-              if(icont==3)
-                icont++;
-            }
-          if(somat==5)
-          {
-            strcpy(input,validacao);
-            valido=0;
-          }else printf("\nSemestre inválido. Tente novamente\n");
-          
-        }else printf("\nPadrão inválido. Tente novamente\n");
-        
-      }else printf("\nSemestre inválido. Tente novamente\n");
-      
-    }else printf("\nSemestre inválido. Tente novamente\n");
-  }
-}
-
-void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast){
-  int Existeprof=0;
-  int icont;
-  int valido=1;
-  char comparar[Tam_Nome];
-  
-  if(qtd_prof_cadast==0)
-  {
-    printf("\nNão existe professor cadastrado no sistema.\n\n");
-    valido=0;
-  }
-  //else
-  while(valido!=0)
-  {
-    printf("\nInsira o nome do professor referente a disciplina\n\n");
-    fgets(comparar, Tam_Nome, stdin);
-    delbar0(comparar);
-    Existeprof=0;
-    for(icont=0;icont<qtd_prof_cadast;icont++)
-    {
-      if(strcmp(comparar, ListaDeProfessor[icont].Nome)==0)
-      {
-        Existeprof=1;
-        break;
-      }
-    }
-    if(Existeprof){
-      strcpy(professor,comparar);
-      valido=0;
-    }else printf("Nome não encontrado. Tente novamente.\n");
-  }
-}
-
 int PadraoCodigo(){
   char str[10];
   int icont;
@@ -311,6 +214,15 @@ int PadraoCodigo(){
     }else printf("Codigo invalido! Tente novamente:");
   }
   return codigo;
+}
+
+int BuscarPosicaoDisciplina(Disciplina ListaDeDisciplina[],int codigo,int qtd_disc_cadastrado){
+  int icont;
+  int posicao=-1;
+  for(icont=0;icont<qtd_disc_cadastrado;icont++)
+    if(ListaDeDisciplina[icont].Codigo == codigo)
+      posicao = icont;
+  return posicao;
 }
 
 void PreencherDados(Aluno *ListaDeAlunos,int qtd_alunos_cadastrados,Professor ListaDeProfessor[],int qtd_prof_cadastrado,Disciplina ListaDeDisciplina[],int qtd_disc_cadastrado){

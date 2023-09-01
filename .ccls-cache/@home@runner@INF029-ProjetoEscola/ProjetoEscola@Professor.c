@@ -25,6 +25,8 @@ void InserirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
     ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,
   	  &ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
     ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
+
+    printf("\nProfessor Inserido com Sucesso!\n");
   }else printf("\nNúmero máximo de professores atingido\nNão é possível cadastrar um novo professor.\n");
 }
 
@@ -68,60 +70,113 @@ void ExcluirProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
 }
 
 void AtualizarProfessor(Professor ListaDeProfessor[], int qtd_prof_cadastrado) {
-  int mat_encontrado=0;
+
   int icont;
   int jcont;
   int sair=1;
+  int mat_valida;
   char matriculaprof[Tam_Matricula];
   int MenuAtualizarprof;
-  while(sair!=0){
-    printf("Insira a Matrícula do professor: ");
-    fgets(matriculaprof, Tam_Matricula, stdin);
-    delbar0(matriculaprof);
+
+  if(qtd_prof_cadastrado>0){
+    while(sair!=0){
+      printf("\nInsira a Matrícula do professor: \n");
+      fgets(matriculaprof, Tam_Matricula, stdin);
+      delbar0(matriculaprof);
   
-    for (icont = 0; icont < qtd_prof_cadastrado + 1; icont++) {
-      if (strcmp(ListaDeProfessor[icont].Matricula,matriculaprof)==0) {
+      mat_valida = BuscarPosicaoProfessor(ListaDeProfessor, matriculaprof,qtd_prof_cadastrado);
+      
+      if(mat_valida>=0){
+        
+        getchar();
         printf("\nATUALIZAÇÃO DE DADOS: PROFESSOR\n\n");
         printf("\nInforme o dado que deseja atualizar\n");
+        printf("0 - Retornar\n");
         printf("1 - Matrícula\n");
         printf("2 - Nome\n");
         printf("3 - CPF\n");
         printf("4 - Data de nascimento\n");
         printf("5 - Sexo\n");
         MenuAtualizarprof = VerificacaoValorMenu(0,5);
-        mat_encontrado=1;
-
+        
+  
         switch (MenuAtualizarprof) {
+          case 0:{
+            sair=0;
+            break;
+          }
           case 1:{
-        	  ValidarMatricula(ListaDeProfessor[qtd_prof_cadastrado].Matricula);
+            ValidarMatricula(ListaDeProfessor[mat_valida].Matricula);
+            sair=0;
             break;
           }
           case 2:{
-           ValidarNome(ListaDeProfessor[qtd_prof_cadastrado].Nome);
+           ValidarNome(ListaDeProfessor[mat_valida].Nome);
+            sair=0;
            break;
           }
           case 3:{
-            ValidarCPF(ListaDeProfessor[qtd_prof_cadastrado].Cpf);
+            ValidarCPF(ListaDeProfessor[mat_valida].Cpf);
+            sair=0;
              break;
           }
           case 4:{
-            ValidarData(ListaDeProfessor[qtd_prof_cadastrado].DataNasc.str_data,
-          &ListaDeProfessor[qtd_prof_cadastrado].DataNasc);
+            ValidarData(ListaDeProfessor[mat_valida].DataNasc.str_data,
+          &ListaDeProfessor[mat_valida].DataNasc);
+            sair=0;
              break;
           }
           case 5:{
-            ValidarSexo(&ListaDeProfessor[qtd_prof_cadastrado].Sexo);
+            ValidarSexo(&ListaDeProfessor[mat_valida].Sexo);
+            sair=0;
             break;
           }
         }
-      }
-      if(icont==qtd_prof_cadastrado-1 && mat_encontrado==0){
-        printf("Matrícula não encontrada!");
-      }else
-        sair=0;
-    
+      }else printf("\nMatrícula não encontrada.\n");
     }
+  }else printf("\nNão há professores cadastrados no sistema.\n");
+}
+
+void ValidarNomeProf(char professor[], Professor ListaDeProfessor[], int qtd_prof_cadast){
+  int Existeprof=0;
+  int icont;
+  int valido=1;
+  char comparar[Tam_Nome];
+  
+  if(qtd_prof_cadast==0)
+  {
+    printf("\nNão existe professor cadastrado no sistema.\n\n");
+    valido=0;
   }
+  //else
+  while(valido!=0)
+  {
+    printf("\nInsira o nome do professor referente a disciplina\n\n");
+    fgets(comparar, Tam_Nome, stdin);
+    delbar0(comparar);
+    Existeprof=0;
+    for(icont=0;icont<qtd_prof_cadast;icont++)
+    {
+      if(strcmp(comparar, ListaDeProfessor[icont].Nome)==0)
+      {
+        Existeprof=1;
+        break;
+      }
+    }
+    if(Existeprof){
+      strcpy(professor,comparar);
+      valido=0;
+    }else printf("Nome não encontrado. Tente novamente.\n");
+  }
+}
+
+int BuscarPosicaoProfessor(Professor ListaDeProfessores[], char matricula[],int qtd_prof_cadastrados){
+  int icont;
+  int posicao=-1;
+  for(icont=0;icont<qtd_prof_cadastrados;icont++)
+    if(strcmp(matricula, ListaDeProfessores[icont].Matricula)==0)
+      posicao = icont;
+  return posicao;
 }
 
 /*

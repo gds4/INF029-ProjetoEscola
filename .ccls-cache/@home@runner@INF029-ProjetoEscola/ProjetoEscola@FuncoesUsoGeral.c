@@ -206,32 +206,97 @@ void ValidarData(char Lista[], Data *Referido) {
 
 void ValidarCPF(char Lista[]) {
   int valido = 0;
-  int icont;
+  int icont,pcont;
   int int_tam_cpf;
   int validacao = 0;
+
   while (valido != 1) {
-    printf("Insira o Cpf no formato xxx.xxx.xxx-xx\n");
+    printf("\nInsira o Cpf no formato xxx.xxx.xxx-xx\n");
     fgets(Lista, Tam_Cpf, stdin);
     delbar0(Lista);
-    int_tam_cpf = strlen(Lista);
-    if (int_tam_cpf == 14) {
-      if (Lista[3] >= '.' && Lista[7] <= '.') {
-        if (Lista[11] == '-') {
-          for (icont = 0; icont < 15; icont++) {
-            if (Lista[icont] >= '0' && Lista[icont] <= '9')
-              validacao++;
-            if (icont == 2 || icont == 6 || icont == 10)
-              icont++;
-          }
-          if (validacao == 11) {
-            valido = 1;
+
+      int_tam_cpf = strlen(Lista);
+      if (int_tam_cpf == 14) {
+        if (Lista[3] >= '.' && Lista[7] <= '.') {
+          if (Lista[11] == '-') {
+            for (icont = 0; icont < 15; icont++) {
+              if (Lista[icont] >= '0' && Lista[icont] <= '9')
+                validacao++;
+              if (icont == 2 || icont == 6 || icont == 10)
+                icont++;
+            }
+            if (validacao == 11) {
+              valido = 1;
+            } else
+              printf("\nCPF Inválido, Tente Novamente\n");
           } else
             printf("\nCPF Inválido, Tente Novamente\n");
         } else
           printf("\nCPF Inválido, Tente Novamente\n");
       } else
-        printf("\nCPF Inválido, Tente Novamente\n");
-    } else
       printf("\nCPF Inválido, Tente Novamente\n");
+  }
+  
+}
+
+void ValidarCodigoDisc(int *codigo){
+  int icont;
+  int valido=1;
+  char input[10];
+  int somat=0;
+  while(valido!=0){
+    somat=0;
+    printf("\nInsira o código da disciplina\n");
+    fgets(input,10,stdin);
+    delbar0(input);
+    int tam_input=strlen(input);
+    if(tam_input==5){
+      for(icont=0;input[icont]!='\0';icont++){
+        if(input[icont]>='0' && input[icont]<='9'){
+          somat++;
+        }
+      }
+      if(somat==5){
+        *codigo=atoi(input);
+        valido=0;
+      }else printf("\nCódigo inválido! Tente novamente.\n");
+    }else printf("\nO código deve conter 5 digitos. Tente novamente.\n");
+  }
+}
+
+void ValidarSemestre(char input[]){
+  char validacao[10];
+  int icont;
+  int valido=1;
+  int somat;
+  while (valido!=0){
+    printf("\nInforme o semestre da disciplina:\n\n");
+    fgets(validacao,10,stdin);
+    delbar0(validacao);
+    if(strlen(validacao)==6)
+    {
+      if(validacao[5]=='1' || validacao[5]=='2')
+      {
+        if(validacao[4]=='.')
+        {
+          somat=0;
+          for(icont=0;validacao[icont]!='\0';icont++)
+            if(validacao[icont]>='0' && validacao[icont]<='9')
+            {
+              somat++;
+              if(icont==3)
+                icont++;
+            }
+          if(somat==5)
+          {
+            strcpy(input,validacao);
+            valido=0;
+          }else printf("\nSemestre inválido. Tente novamente\n");
+          
+        }else printf("\nPadrão inválido. Tente novamente\n");
+        
+      }else printf("\nSemestre inválido. Tente novamente\n");
+      
+    }else printf("\nSemestre inválido. Tente novamente\n");
   }
 }
