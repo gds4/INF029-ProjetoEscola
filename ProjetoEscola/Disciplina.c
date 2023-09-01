@@ -24,6 +24,7 @@ void InserirDisciplina(Disciplina ListaDeDisciplina[], int qtd_disc_cadastrado, 
   if(qtd_disc_cadastrado<QTD_Disc){
     printf("\nInsira o nome da disciplina:\n");
     fgets(ListaDeDisciplina[qtd_disc_cadastrado].Nome, Tam_Nome_Disc, stdin);
+    delbar0(ListaDeDisciplina[qtd_disc_cadastrado].Nome);
   
     ValidarCodigoDisc(&ListaDeDisciplina[qtd_disc_cadastrado].Codigo);
   
