@@ -7,6 +7,7 @@
 #define Tam_Nome_Disc 20
 #define Tam_Cpf 16
 #define Tam_Codigo 6
+#define Tam_Linha_dados_alunos 99
 #define QTD_Alunos 10
 #define QTD_Disc_Max 10
 #define Num_Max_Alunos 40
@@ -31,5 +32,6 @@ int qtd_disc_cadastrado, Disciplina ListaDeDisciplina[]);
 void AtualizarAluno(Aluno ListaDeAlunos[], int qtd_alunos_cadastrados);
 int BuscarPosicaoAluno(Aluno alunos[], char matricula[],int qtd_alunos_cadastrados);
 int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, const char *matricula);
+void SalvarAluno(Aluno ListadeAlunos[],int qtd_alunos_cadastrados);
 
 #endif

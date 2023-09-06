@@ -170,3 +170,30 @@ int verificarExistenciaMatricula(Aluno alunos[], int qtd_alunos_cadastrados, con
     }
     return 0;
 }
+
+void SalvarAluno(Aluno ListadeAlunos[],int qtd_alunos_cadastrados){
+  FILE *Alunos;
+  Alunos = fopen("dados_alunos.txt", "w+");
+  int icont;
+  for(icont=0;icont<qtd_alunos_cadastrados;icont++){
+    fprintf(Alunos,"A;%s;%s;%c;%s;%s;%d;%d;%d;", 
+      ListadeAlunos[icont].Matricula,
+      ListadeAlunos[icont].Nome,
+      ListadeAlunos[icont].Sexo,ListadeAlunos[icont].Cpf,
+      ListadeAlunos[icont].DataNasc.str_data,
+      ListadeAlunos[icont].DataNasc.dia,
+      ListadeAlunos[icont].DataNasc.mes,
+      ListadeAlunos[icont].DataNasc.ano);
+  }
+  fclose(Alunos);
+}
+
+void RecuperarAluno(){
+  FILE *Alunos;
+  char aluno[Tam_Linha_dados_alunos];
+
+  fgets(aluno,Tam_Linha_dados_alunos,Alunos);
+
+  while(!feof(Alunos))
+    fgets(aluno,Tam_Linha_dados_alunos,Alunos);
+}

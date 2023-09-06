@@ -229,6 +229,7 @@ int main(void) {
 	    InicioCont=0;
     
 	}
+  SalvarAluno(ListaDeAlunos, qtd_alunos_cadastrados);
   printf("\nPrograma Finalizado!");
   return 0;
 }
